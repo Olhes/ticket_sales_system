@@ -1,110 +1,199 @@
-/* frontend/css/style.css */
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+body{
+    font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    background-color:#f8f8f8;
+    color:#333;
+    overflow-x:hidden;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 20px 5%;
+    background-color:#fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .Logo{
+    font-weight: 700;
+    font-size: 1.2em;
     color: #333;
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.navbar nav ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
 }
-h1, h2 {
-    color: #0056b3;
+.navbar ul li{
+    margin-left: 30px;
 }
-form {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
+
+.navbar nav ul li a{
+    text-decoration:none;
+    color:#555;
+    font-weight:600;
+    transition: color 0.3s ease;
+}
+
+.navbar nav ul li a:hover{
+    color: #ff6b6b;
+}
+
+.get-started1{
+    background-color:#ff6b6b;
+    color:white;
+    border:none;
+    padding: 10px 25px;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    font-size:1em;
+    cursor:pointer;
+    transition: background-color 0.3s ease;
 }
-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+
+.get-started1:hover{
+    background-color:#e05e5e;
+
 }
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form input[type="date"],
-form input[type="number"],
-form select {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-form button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-form button:hover {
-    background-color: #0056b3;
-}
-.message {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-.message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border-color: #c3e6cb;
-}
-.message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-color: #f5c6cb;
-}
-.data-display {
-    border: 1px solid #eee;
-    padding: 10px;
-    background-color: #fafafa;
-    border-radius: 5px;
-    max-height: 400px;
-    overflow-y: auto;
-}
-.data-item {
-    border-bottom: 1px dashed #ddd;
-    padding: 8px 0;
-}
-.data-item:last-child {
-    border-bottom: none;
-}
-button.action-btn {
-    background-color: #dc3545;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-left: 10px;
-}
-button.action-btn:hover {
-    background-color: #c82333;
-}
-#ticketsList ul {
-    list-style: none;
-    padding: 0;
-}
-#ticketsList li {
-    background-color: #e9ecef;
-    margin-bottom: 8px;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
+
+.title{
+    display:flex;
+    justify-content:center;
     align-items: center;
+    padding: 50px 5%;
+    background-color: #fefefe;
+    min-height:80vh;
+    position:relative;
+    overflow:hidden;
+}
+
+.title::before{
+     content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 107, 107, 0.1); 
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.title::after{
+     content: '';
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(100, 150, 250, 0.05); 
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.content {
+    flex: 1;
+    max-width: 500px;
+    z-index: 1; /* Asegura que el contenido esté sobre las formas de fondo */
+}
+
+.content h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.get-started2 {
+    background-color: #ff6b6b; /* Mismo color que el botón "Get Started" */
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.get-started2:hover {
+    background-color: #e05e5e;
+}
+
+.image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.-image img {
+    max-width: 100%;
+    height: auto;
+    display: block; 
+}
+
+@media (max-width: 900px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .title {
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .image {
+        padding-top: 20px;
+    }
+
+    .title h1 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar nav {
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .navbar nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar nav ul li {
+        margin: 10px 0;
+    }
+
+    .get-started1 {
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .title h1 {
+        font-size: 2em;
+    }
+
+    .title p {
+        font-size: 1em;
+    }
 }

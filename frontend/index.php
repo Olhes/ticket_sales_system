@@ -7,74 +7,38 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Sistema de Venta de Tickets de Bus - Frontend Demo</h1>
-        <p>Este es un frontend básico para probar la API PHP.</p>
+    <header class="navbar">
+        <div class="Logo">YOUR WEBSITE</div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php">About us</a></li>
+                <li><a href="form.php">Login</a></li>
+                <li><a href="index.php">Info</a></li>
+            </ul>
+        </nav>
 
-        <div id="messageArea" class="message" style="display:none;"></div>
+        <button class="get-started1">Get Started</button>
+    </header>
 
-        <h2>Autenticación</h2>
-        <form id="registerForm">
-            <h3>Registrar</h3>
-            <label for="regName">Nombre:</label>
-            <input type="text" id="regName" name="name" required><br>
-            <label for="regEmail">Email:</label>
-            <input type="email" id="regEmail" name="email" required><br>
-            <label for="regPassword">Contraseña:</label>
-            <input type="password" id="regPassword" name="password" required><br>
-            <button type="submit">Registrar</button>
-        </form>
-
-        <form id="loginForm">
-            <h3>Iniciar Sesión</h3>
-            <label for="loginEmail">Email:</label>
-            <input type="email" id="loginEmail" name="email" required><br>
-            <label for="loginPassword">Contraseña:</label>
-            <input type="password" id="loginPassword" name="password" required><br>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-
-        <button id="logoutBtn" style="display: none;">Cerrar Sesión</button>
-        <p id="loggedInUser" style="display: none;">Sesión de: <span id="userEmailDisplay"></span> (<span id="userRoleDisplay"></span>)</p>
-
-        <hr>
-
-        <h2>Buscar Horarios y Reservar</h2>
-        <form id="searchScheduleForm" style="display: none;">
-            <h3>Buscar Horarios</h3>
-            <label for="searchRoute">ID de Ruta (ej. 1):</label>
-            <input type="number" id="searchRoute" name="route_id" required><br>
-            <label for="searchDate">Fecha (YYYY-MM-DD):</label>
-            <input type="date" id="searchDate" name="date" required><br>
-            <button type="submit">Buscar Horarios</button>
-        </form>
-
-        <div id="schedulesResult" class="data-display" style="display: none;">
-            <h4>Horarios Disponibles:</h4>
-            <ul id="schedulesList">
-                </ul>
+    <main class="title">
+        <div class="content">
+            <h1>BUSES PAKA</h1>
+            <p>Bienvenidos a will se la come.com, terminal buses by pakabussines and we hope to like you.
+            </p>
+            <button class="get-started2">GET STARTED</button>
         </div>
-
-        <form id="bookTicketForm" style="display: none;">
-            <h3>Reservar Ticket</h3>
-            <label for="bookScheduleId">ID de Horario:</label>
-            <input type="number" id="bookScheduleId" name="schedule_id" required><br>
-            <label for="bookSeatNumber">Número de Asiento:</label>
-            <input type="number" id="bookSeatNumber" name="seat_number" required><br>
-            <button type="submit">Reservar Ticket</button>
-        </form>
-
-        <hr>
-
-        <h2>Mis Tickets</h2>
-        <button id="viewMyTicketsBtn" style="display: none;">Ver Mis Tickets</button>
-        <div id="ticketsResult" class="data-display" style="display: none;">
-            <h4>Mis Reservas:</h4>
-            <ul id="ticketsList">
-                </ul>
+        <div class="image">
+            <img src="./images/bus.jpg" alt=""> 
         </div>
+    </main>
 
-    </div>
+
+
+
+
+
+
 
     <script type="module" src="js/config.js"></script>
     <script type="module" src="js/ui.js"></script>
