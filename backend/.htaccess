@@ -1,0 +1,26 @@
+# .htaccess
+# Activar el motor de reescritura de URLs
+RewriteEngine On
+
+# Evitar la reescritura para archivos y directorios existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Reescritura para la carpeta /api/
+# Convierte /api/subfolder/file a /api/subfolder/file.php
+RewriteRule ^api/(.*)$ api/$1.php [L,QSA]
+
+# Configuración CORS (Cross-Origin Resource Sharing)
+# Esto es crucial si tu frontend está en un dominio diferente.
+# ADVERTENCIA: "*" permite cualquier origen. Para producción, REEMPLAZA "*" con tu dominio de frontend (ej. https://tudominiofrontend.com).
+# Para desarrollo, "*" suele ser conveniente.
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+# Si usas sesiones/cookies para autenticación (como en este ejemplo), esto es necesario.
+# Si usas JWT u otro método sin cookies, puedes omitirlo o ajustarlo.
+Header set Access-Control-Allow-Credentials "true"
+
+# Manejo de solicitudes OPTIONS (preflight requests de CORS)
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
