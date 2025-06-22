@@ -24,7 +24,7 @@
     <main class="title">
         <div class="content">
             <h1>BUSES PAKA</h1>
-            <p>Bienvenidos a will se la come.com, terminal buses by pakabussines and we hope to like you.
+            <p>Bienvenidos a jhon se la come.com, terminal buses by pakabussines and we hope to like you.
             </p>
             <button class="get-started2">GET STARTED</button>
         </div>
