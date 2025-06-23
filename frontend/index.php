@@ -18,7 +18,7 @@
             </ul>
         </nav>
 
-        <button class="get-started1">Get Started</button>
+        <a href="form.php" class="get-started1">Get Started</a>
     </header>
 
     <main class="title">
@@ -26,7 +26,7 @@
             <h1>BUSES PAKA</h1>
             <p>Bienvenidos a jhon se la come.com, terminal buses by pakabussines and we hope to like you.
             </p>
-            <button class="get-started2">GET STARTED</button>
+            <a href="form.php" class="get-started2">Get Started</a>
         </div>
         <div class="image">
             <img src="./images/bus.jpg" alt=""> 

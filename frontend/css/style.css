@@ -48,6 +48,7 @@ body{
     color:white;
     border:none;
     padding: 10px 25px;
+    text-decoration:none;
     border-radius: 5px;
     font-size:1em;
     cursor:pointer;
@@ -116,10 +117,11 @@ body{
 }
 
 .get-started2 {
-    background-color: #ff6b6b; /* Mismo color que el botón "Get Started" */
+    background-color: #ff6b6b; 
     color: white;
     border: none;
     padding: 15px 35px;
+    text-decoration:none;
     border-radius: 5px;
     font-size: 1.1em;
     cursor: pointer;

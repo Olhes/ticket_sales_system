@@ -18,14 +18,13 @@ class Auth {
      * @param string $name
      * @param string $email
      * @param string $password
-     * @param string $role (ej. 'student', 'admin')
      * @return bool True si el registro fue exitoso, false en caso contrario.
      */
     public function register($name, $email, $password, $role = 'student') {
         if ($this->user->findByEmail($email)) {
             return false; // Usuario con ese email ya existe
         }
-        return $this->user->create($name, $email, password_hash($password, PASSWORD_BCRYPT), $role);
+        return $this->user->create($name, $email, password_hash($password, PASSWORD_BCRYPT));
     }
 
     /**

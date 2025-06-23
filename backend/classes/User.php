@@ -1,9 +1,9 @@
 <?php
 // classes/User.php
-
+//Clase para entidad Usuario
 class User {
     private $conn;
-    private $table_name = "users"; // Asegúrate que coincida con tu tabla SQL
+    private $table_name = "Usuario"; // Asegúrate que coincida con tu tabla SQL
 
     public function __construct($db) {
         $this->conn = $db;
@@ -14,17 +14,16 @@ class User {
      * @param string $name
      * @param string $email
      * @param string $password_hash (ya hasheada)
-     * @param string $role
      * @return bool True si la creación fue exitosa.
      */
-    public function create($name, $email, $password_hash, $role = 'student') {
-        $query = "INSERT INTO " . $this->table_name . " (name, email, password, role) VALUES (:name, :email, :password, :role)";
+    public function create($name, $email, $password_hash) {
+        $query = "INSERT INTO " . $this->table_name . " (name, email, password) VALUES (:name, :email, :password)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password_hash);
-        $stmt->bindParam(':role', $role);
+        
 
         try {
             return $stmt->execute();
