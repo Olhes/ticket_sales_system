@@ -3,7 +3,7 @@
 //Clase para entidad Usuario
 class User {
     private $conn;
-    private $table_name = "Usuario"; // Asegúrate que coincida con tu tabla SQL
+    private $table_name = "Usuario"; 
 
     public function __construct($db) {
         $this->conn = $db;
@@ -17,7 +17,7 @@ class User {
      * @return bool True si la creación fue exitosa.
      */
     public function create($name, $email, $password_hash) {
-        $query = "INSERT INTO " . $this->table_name . " (name, email, password) VALUES (:name, :email, :password)";
+        $query = "INSERT INTO " . $this->table_name . " (Nombre, Correo, Contraseña) VALUES (:name, :email, :password)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':name', $name);
@@ -39,7 +39,7 @@ class User {
      * @return array|false Los datos del usuario o false si no se encuentra.
      */
     public function findByEmail($email) {
-        $query = "SELECT id, name, email, password, role FROM " . $this->table_name . " WHERE email = :email LIMIT 0,1";
+        $query = "SELECT IdUsuario, Nombre, Correo, Contraseña FROM " . $this->table_name . " WHERE correo = :email LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();

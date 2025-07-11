@@ -24,7 +24,7 @@
     <main class="title">
         <div class="content">
             <h1>BUSES PAKA</h1>
-            <p>Bienvenidos a jhon se la come.com, terminal buses by pakabussines and we hope to like you.
+            <p>Bienvenidos will se la come.com, terminal buses by pakabussines and we hope to like you.
             </p>
             <a href="form.php" class="get-started2">Get Started</a>
         </div>

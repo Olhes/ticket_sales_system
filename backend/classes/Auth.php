@@ -36,15 +36,15 @@ class Auth {
     public function login($email, $password) {
         $user_data = $this->user->findByEmail($email);
 
-        if ($user_data && password_verify($password, $user_data['password'])) {
-            $_SESSION['user_id'] = $user_data['id'];
-            $_SESSION['user_email'] = $user_data['email'];
-            $_SESSION['user_role'] = $user_data['role'];
+        if ($user_data && password_verify($password, $user_data['Contraseña'])) {
+            $_SESSION['user_id'] = $user_data['IdUsuario'];
+            $_SESSION['user_email'] = $user_data['Correo'];
+            $_SESSION['user_role'] = $user_data['Rol'];
 
-            unset($user_data['password']); // No enviar la contraseña al cliente
+            unset($user_data['Contraseña']); 
             return $user_data;
         }
-        return false; // Credenciales inválidas
+        return false; 
     }
 
     /**

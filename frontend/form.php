@@ -11,16 +11,16 @@
 <body>
    <div class="container">
         <div class="form-box login">
-            <form action="">
+            <form action="../backend/api/auth/login.php" method="POST">
                 <div>
                     <h1>LOGIN</h1>
                     <div class="input-box">
-                        <input  type="text" placeholder="usuario" required> 
+                        <input  type="email" placeholder="correo" required name="email"> 
                         <i class="bx bxs-user"></i>
                     </div>
                     
                     <div class="input-box">
-                        <input  type="text" placeholder="contraseña" required>
+                        <input  type="text" placeholder="contraseña" required name="password">
                         <i class="bx bxs-lock-alt"></i>
                     </div>
 
@@ -42,18 +42,25 @@
         </div>
         
         <div class="form-box register">
-            <form action="">
+            <form action="../backend/api/auth/register.php" method="POST">
                 <div>
                     <h1>REGISTRATE</h1>
                     <div class="input-box">
-                        <input  type="text" placeholder="usuario" required> 
+                        <input  type="text" placeholder="usuario" name="name" required> 
                         <i class="bx bxs-user"></i>
                     </div>
-                    
+
                     <div class="input-box">
-                        <input  type="text" placeholder="contraseña" required>
+                        <input  type="email" placeholder="correo" name="email" required>
                         <i class="bx bxs-lock-alt"></i>
                     </div>
+
+
+                    <div class="input-box">
+                        <input  type="text" placeholder="contraseña" name="password" required>
+                        <i class="bx bxs-lock-alt"></i>
+                    </div>
+                    
 
                   
                     <button class="btn">REGISTRATE</button>

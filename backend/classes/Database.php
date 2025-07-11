@@ -22,8 +22,7 @@ class Database {
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $exception) {
             error_log("Error de conexión a la base de datos: " . $exception->getMessage());
-            // En un entorno de producción, no mostrar el mensaje de error directamente.
-            // sendError("Problema de conexión con el servidor. Intenta más tarde.", 500);
+           
             return null;
         }
         return $this->conn;

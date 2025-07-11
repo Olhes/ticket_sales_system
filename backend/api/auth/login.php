@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Auth.php';
 require_once __DIR__ . '/../../classes/User.php'; // Auth necesita User
 require_once __DIR__ . '/../../utils/helpers.php';
-
+require_ONCE __DIR__.   '/../../../frontend/form.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendError("Método no permitido.", 405);
 }
