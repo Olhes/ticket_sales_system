@@ -34,25 +34,53 @@ index.php        # Main entry point (can route to frontend or backend)
 
 ## How to Run
 
-1. **Clone the repository:**
+1. **Prerequisites:**
+    - PHP 7.4 or higher
+    - MySQL or MariaDB
+    - Web server (Apache, Nginx) or PHP built-in server
+
+2. **Clone the repository:**
     ```bash
     git clone https://github.com/Olhes/ticket_sales_system.git
     cd ticket_sales_system
     ```
 
-2. **Set up the database:**
-    - Create a MySQL/MariaDB database
-    - Import the schema from `backend/db/database.sql` into your database.
-    - Update database credentials in `backend/config/databases.php`.
+3. **Configure the database:**
+    - Make sure MySQL/MariaDB is running
+    - Update database credentials in `backend/config/databases.php` if needed
+    - Default settings: host=localhost, user=root, password=empty
 
-3. **Run the PHP built-in server:**
+4. **Initialize the database:**
+    - Run the PHP built-in server:
     ```bash
     php -S localhost:8000
     ```
-    - By default, this will serve files from the project root. Access the app at [http://localhost:8000/frontend/index.php](http://localhost:8000/frontend/index.php)
+    - Open your browser and go to `http://localhost:8000/setup.php`
+    - This will create the database, tables, and sample data automatically
 
-4. **Access the application:**
-    - Open your browser and go to  `http://localhost:8000/` or `http://localhost:8000/frontend/index.php`
+5. **Access the application:**
+    - **Main page:** `http://localhost:8000/` or `http://localhost:8000/frontend/index.php`
+    - **Login/Register:** `http://localhost:8000/frontend/form.php`
+    - **Dashboard:** `http://localhost:8000/frontend/dashboard.php` (requires login)
+
+## Features Implemented
+
+- ✅ User registration and authentication
+- ✅ Dashboard with statistics
+- ✅ View available routes and schedules
+- ✅ Book tickets with passenger information
+- ✅ View user's booked tickets
+- ✅ Responsive design
+- ✅ Complete database integration
+- ✅ Sample data for testing
+
+## Usage
+
+1. **Register a new account** or login with existing credentials
+2. **Browse available routes** in the dashboard
+3. **Select a route and schedule** to book a ticket
+4. **Fill passenger information** and seat number
+5. **View your booked tickets** in the "Mis Boletos" section
 
 ## Notes
 - No external PHP frameworks are required.

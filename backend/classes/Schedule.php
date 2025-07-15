@@ -3,30 +3,54 @@
 //clase para el horario/Viaje
 class Schedule {
     private $conn;
-    private $table_name = "schedules"; // Asegúrate que coincida con tu tabla SQL
+    private $table_name = "Horario";
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
     /**
-     * Obtiene los horarios para una ruta y fecha específicas.
-     * @param int $route_id
-     * @param string $date (Formato 'YYYY-MM-DD')
+     * Obtiene todos los horarios con información completa.
      * @return array Lista de horarios.
      */
-    public function findByRouteAndDate($route_id, $date) {
-        $query = "SELECT
-                    s.id, s.route_id, s.bus_id, s.departure_time, s.arrival_time, s.date, s.price, s.available_seats,
-                    r.origin, r.destination, b.plate_number, b.capacity, b.model
-                  FROM " . $this->table_name . " s
-                  JOIN routes r ON s.route_id = r.id
-                  JOIN buses b ON s.bus_id = b.id
-                  WHERE s.route_id = :route_id AND s.date = :date AND s.available_seats > 0
-                  ORDER BY s.departure_time";
+    public function getAll() {
+        $query = "SELECT 
+                    h.IdHorario, h.FechaSalida, h.HoraSalida, h.HoraLlegada, h.PrecioBase,
+                    CONCAT(tor.Nombre, ' → ', td.Nombre) as ruta,
+                    CONCAT(b.Placa, ' (', b.TipoBus, ')') as bus,
+                    CONCAT(c.Nombres, ' ', c.Apellidos) as conductor
+                  FROM " . $this->table_name . " h
+                  JOIN Ruta r ON h.IdRuta = r.IdRuta
+                  JOIN Terminal tor ON r.IdTerminalOrigen = tor.IdTerminal
+                  JOIN Terminal td ON r.IdTerminalDestino = td.IdTerminal
+                  JOIN Bus b ON h.IdBus = b.IdBus
+                  JOIN Conductor c ON h.IdConductor = c.IdConductor
+                  ORDER BY h.FechaSalida, h.HoraSalida";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Obtiene los horarios para una ruta específica.
+     * @param int $route_id
+     * @return array Lista de horarios.
+     */
+    public function findByRoute($route_id) {
+        $query = "SELECT 
+                    h.IdHorario, h.FechaSalida, h.HoraSalida, h.HoraLlegada, h.PrecioBase,
+                    b.CapacidadBus,
+                    (b.CapacidadBus - COALESCE(
+                        (SELECT COUNT(*) FROM Boleto bo 
+                         JOIN Reserva res ON bo.IdReserva = res.IdReserva 
+                         WHERE bo.IdHorario = h.IdHorario AND res.Estado = 'Confirmada'), 0
+                    )) as asientos_disponibles
+                  FROM " . $this->table_name . " h
+                  JOIN Bus b ON h.IdBus = b.IdBus
+                  WHERE h.IdRuta = :route_id AND h.FechaSalida >= CURDATE()
+                  ORDER BY h.FechaSalida, h.HoraSalida";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':route_id', $route_id, PDO::PARAM_INT);
-        $stmt->bindParam(':date', $date);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -37,7 +61,13 @@ class Schedule {
      * @return array|false Datos del horario o false si no se encuentra.
      */
     public function getById($id) {
-        $query = "SELECT id, route_id, bus_id, departure_time, arrival_time, date, price, available_seats FROM " . $this->table_name . " WHERE id = :id LIMIT 0,1";
+        $query = "SELECT 
+                    h.IdHorario, h.FechaSalida, h.HoraSalida, h.HoraLlegada, h.PrecioBase,
+                    h.IdRuta, h.IdBus, h.IdConductor,
+                    b.CapacidadBus
+                  FROM " . $this->table_name . " h
+                  JOIN Bus b ON h.IdBus = b.IdBus
+                  WHERE h.IdHorario = :id LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -45,37 +75,25 @@ class Schedule {
     }
 
     /**
-     * Decrementa el número de asientos disponibles para un horario.
+     * Verifica si hay asientos disponibles para un horario.
      * @param int $schedule_id
-     * @return bool True si la actualización fue exitosa.
+     * @return bool
      */
-    public function decrementAvailableSeats($schedule_id) {
-        $query = "UPDATE " . $this->table_name . " SET available_seats = available_seats - 1 WHERE id = :id AND available_seats > 0";
+    public function hasAvailableSeats($schedule_id) {
+        $query = "SELECT 
+                    (b.CapacidadBus - COALESCE(
+                        (SELECT COUNT(*) FROM Boleto bo 
+                         JOIN Reserva res ON bo.IdReserva = res.IdReserva 
+                         WHERE bo.IdHorario = :schedule_id AND res.Estado = 'Confirmada'), 0
+                    )) as asientos_disponibles
+                  FROM Horario h
+                  JOIN Bus b ON h.IdBus = b.IdBus
+                  WHERE h.IdHorario = :schedule_id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $schedule_id, PDO::PARAM_INT);
-        try {
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Error al decrementar asientos: " . $e->getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Incrementa el número de asientos disponibles para un horario (ej. al cancelar un ticket).
-     * @param int $schedule_id
-     * @return bool True si la actualización fue exitosa.
-     */
-    public function incrementAvailableSeats($schedule_id) {
-        $query = "UPDATE " . $this->table_name . " SET available_seats = available_seats + 1 WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $schedule_id, PDO::PARAM_INT);
-        try {
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Error al incrementar asientos: " . $e->getMessage());
-            return false;
-        }
+        $stmt->bindParam(':schedule_id', $schedule_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result && $result['asientos_disponibles'] > 0;
     }
 }
 ?>

@@ -11,30 +11,28 @@
 <body>
    <div class="container">
         <div class="form-box login">
-            <form action="">
+            <form id="loginForm">
                 <div>
                     <h1>LOGIN</h1>
                     <div class="input-box">
-                        <input  type="text" placeholder="usuario" required> 
+                        <input type="email" id="loginEmail" placeholder="Email" required> 
                         <i class="bx bxs-user"></i>
                     </div>
                     
                     <div class="input-box">
-                        <input  type="text" placeholder="contraseña" required>
+                        <input type="password" id="loginPassword" placeholder="Contraseña" required>
                         <i class="bx bxs-lock-alt"></i>
                     </div>
 
                     <div class="forgot-link">
                         <a href="#">Olvidaste Contraseña?</a>
                     </div>
-                    <button class="btn">LOGIN</button>
+                    <button type="submit" class="btn">LOGIN</button>
                     <p>o login con otras plataformas</p>        
                     
                     <div class="social-icons">
-                        <a href=""><i class="bx bxl-google"></i></a>
-                        <a href=""><i class="bx bxl-facebook"></i></a>
-                        <a href=""><i class="bx bxl-linkedin"></i></a>
-                        <a href=""><i class="bx bxl-github"></i></a>
+                        <a href="#" id="googleLogin"><i class="bx bxl-google"></i></a>
+                        <a href="#" id="githubLogin"><i class="bx bxl-github"></i></a>
                     </div>
                         
                 </div>
@@ -42,21 +40,26 @@
         </div>
         
         <div class="form-box register">
-            <form action="">
+            <form id="registerForm">
                 <div>
                     <h1>REGISTRATE</h1>
                     <div class="input-box">
-                        <input  type="text" placeholder="usuario" required> 
+                        <input type="text" id="registerName" placeholder="Nombre completo" required> 
                         <i class="bx bxs-user"></i>
                     </div>
                     
                     <div class="input-box">
-                        <input  type="text" placeholder="contraseña" required>
+                        <input type="email" id="registerEmail" placeholder="Email" required> 
+                        <i class="bx bxs-envelope"></i>
+                    </div>
+                    
+                    <div class="input-box">
+                        <input type="password" id="registerPassword" placeholder="Contraseña" required>
                         <i class="bx bxs-lock-alt"></i>
                     </div>
 
                   
-                    <button class="btn">REGISTRATE</button>
+                    <button type="submit" class="btn">REGISTRATE</button>
                     <p>O registrate con otras plataformas</p>        
                     
                     <div class="social-icons">

@@ -11,8 +11,11 @@ CREATE TABLE Usuario (
     IdUsuario INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(255) NOT NULL,
     Correo VARCHAR(255) NOT NULL UNIQUE,
-    Contraseña VARCHAR(255) NOT NULL
-    
+    Contraseña VARCHAR(255) NOT NULL,
+    Rol ENUM('usuario', 'admin') DEFAULT 'usuario',
+    FechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    GoogleId VARCHAR(255) NULL,
+    GithubId VARCHAR(255) NULL
 );
 
 CREATE TABLE Empresa (

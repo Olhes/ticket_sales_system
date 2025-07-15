@@ -3,52 +3,71 @@
 //clase para entidad ticket
 class Ticket {
     private $conn;
-    private $table_name = "tickets"; // Asegúrate que coincida con tu tabla SQL
+    private $reserva_table = "Reserva";
+    private $boleto_table = "Boleto";
+    private $pasajero_table = "Pasajero";
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
     /**
-     * Crea un nuevo ticket (reserva).
+     * Crea un nuevo ticket (reserva completa).
      * @param int $user_id
      * @param int $schedule_id
-     * @param int $seat_number
-     * @param string $status (ej. 'booked', 'pending', 'cancelled')
+     * @param string $passenger_name
+     * @param string $passenger_dni
+     * @param string $seat_number
      * @return bool True si la creación fue exitosa.
      */
-    public function create($user_id, $schedule_id, $seat_number, $status = 'booked') {
-        $query = "INSERT INTO " . $this->table_name . " (user_id, schedule_id, seat_number, booking_date, status) VALUES (:user_id, :schedule_id, :seat_number, NOW(), :status)";
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->bindParam(':schedule_id', $schedule_id, PDO::PARAM_INT);
-        $stmt->bindParam(':seat_number', $seat_number, PDO::PARAM_INT);
-        $stmt->bindParam(':status', $status);
-
+    public function create($user_id, $schedule_id, $passenger_name, $passenger_dni, $seat_number) {
         try {
-            return $stmt->execute();
+            $this->conn->beginTransaction();
+
+            // 1. Crear reserva
+            $query = "INSERT INTO " . $this->reserva_table . " (FechaCreacion, Estado, IdUsuario) VALUES (NOW(), 'Confirmada', :user_id)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $reserva_id = $this->conn->lastInsertId();
+
+            // 2. Crear pasajero
+            $names = explode(' ', $passenger_name, 2);
+            $nombres = $names[0];
+            $apellidos = isset($names[1]) ? $names[1] : '';
+            
+            $query = "INSERT INTO " . $this->pasajero_table . " (Nombres, Apellidos, DNI, IdReserva) VALUES (:nombres, :apellidos, :dni, :reserva_id)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':nombres', $nombres);
+            $stmt->bindParam(':apellidos', $apellidos);
+            $stmt->bindParam(':dni', $passenger_dni);
+            $stmt->bindParam(':reserva_id', $reserva_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $pasajero_id = $this->conn->lastInsertId();
+
+            // 3. Obtener precio del horario
+            $query = "SELECT PrecioBase FROM Horario WHERE IdHorario = :schedule_id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':schedule_id', $schedule_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $horario = $stmt->fetch(PDO::FETCH_ASSOC);
+            $precio = $horario['PrecioBase'];
+
+            // 4. Crear boleto
+            $query = "INSERT INTO " . $this->boleto_table . " (NumAsiento, PrecioFinal, IdReserva, IdHorario, IdPasajero) VALUES (:seat, :precio, :reserva_id, :schedule_id, :pasajero_id)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':seat', $seat_number);
+            $stmt->bindParam(':precio', $precio);
+            $stmt->bindParam(':reserva_id', $reserva_id, PDO::PARAM_INT);
+            $stmt->bindParam(':schedule_id', $schedule_id, PDO::PARAM_INT);
+            $stmt->bindParam(':pasajero_id', $pasajero_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $this->conn->commit();
+            return true;
         } catch (PDOException $e) {
+            $this->conn->rollBack();
             error_log("Error al crear ticket: " . $e->getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Actualiza el estado de un ticket (ej. a 'cancelled').
-     * @param int $ticket_id
-     * @param string $status El nuevo estado.
-     * @return bool True si la actualización fue exitosa.
-     */
-    public function updateStatus($ticket_id, $status) {
-        $query = "UPDATE " . $this->table_name . " SET status = :status WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':id', $ticket_id, PDO::PARAM_INT);
-        try {
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Error al actualizar estado del ticket: " . $e->getMessage());
             return false;
         }
     }
@@ -60,16 +79,20 @@ class Ticket {
      */
     public function getByUserId($user_id) {
         $query = "SELECT
-                    t.id AS ticket_id, t.seat_number, t.booking_date, t.status,
-                    s.departure_time, s.arrival_time, s.date, s.price,
-                    r.origin, r.destination,
-                    b.plate_number, b.model
-                  FROM " . $this->table_name . " t
-                  JOIN schedules s ON t.schedule_id = s.id
-                  JOIN routes r ON s.route_id = r.id
-                  JOIN buses b ON s.bus_id = b.id
-                  WHERE t.user_id = :user_id
-                  ORDER BY t.booking_date DESC";
+                    b.IdBoleto, b.NumAsiento, b.PrecioFinal,
+                    h.FechaSalida, h.HoraSalida, h.HoraLlegada,
+                    CONCAT(tor.Nombre, ' → ', td.Nombre) as ruta,
+                    CONCAT(p.Nombres, ' ', p.Apellidos) as pasajero,
+                    r.Estado, r.FechaCreacion
+                  FROM " . $this->boleto_table . " b
+                  JOIN " . $this->reserva_table . " r ON b.IdReserva = r.IdReserva
+                  JOIN " . $this->pasajero_table . " p ON b.IdPasajero = p.IdPasajero
+                  JOIN Horario h ON b.IdHorario = h.IdHorario
+                  JOIN Ruta rt ON h.IdRuta = rt.IdRuta
+                  JOIN Terminal tor ON rt.IdTerminalOrigen = tor.IdTerminal
+                  JOIN Terminal td ON rt.IdTerminalDestino = td.IdTerminal
+                  WHERE r.IdUsuario = :user_id
+                  ORDER BY r.FechaCreacion DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
@@ -77,16 +100,23 @@ class Ticket {
     }
 
     /**
-     * Obtiene un ticket por su ID.
-     * @param int $ticket_id
-     * @return array|false Datos del ticket o false si no se encuentra.
+     * Cancela una reserva.
+     * @param int $reserva_id
+     * @param int $user_id
+     * @return bool
      */
-    public function getById($ticket_id) {
-        $query = "SELECT id, user_id, schedule_id, seat_number, status FROM " . $this->table_name . " WHERE id = :id LIMIT 0,1";
+    public function cancelReservation($reserva_id, $user_id) {
+        $query = "UPDATE " . $this->reserva_table . " SET Estado = 'Cancelada' WHERE IdReserva = :reserva_id AND IdUsuario = :user_id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $ticket_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->bindParam(':reserva_id', $reserva_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error al cancelar reserva: " . $e->getMessage());
+            return false;
+        }
     }
 }
 ?>

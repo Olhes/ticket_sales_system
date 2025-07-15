@@ -2,9 +2,6 @@
 // utils/helpers.php
 //deinimos funciones de ayuda(para respuestas json)
 
-// Define la cabecera para que el navegador sepa que es una respuesta JSON.
-header('Content-Type: application/json');
-
 /**
  * Envía una respuesta JSON de éxito.
  * @param array $data Los datos a incluir en la respuesta.
@@ -12,6 +9,7 @@ header('Content-Type: application/json');
  * @param int $statusCode Código de estado HTTP.
  */
 function sendResponse($data = [], $message = "Operación exitosa", $statusCode = 200) {
+    header('Content-Type: application/json');
     http_response_code($statusCode);
     echo json_encode([
         'success' => true,
@@ -27,6 +25,7 @@ function sendResponse($data = [], $message = "Operación exitosa", $statusCode =
  * @param int $statusCode Código de estado HTTP.
  */
 function sendError($message = "Error en la operación", $statusCode = 400) {
+    header('Content-Type: application/json');
     http_response_code($statusCode);
     echo json_encode([
         'success' => false,
@@ -64,5 +63,21 @@ function validateRequiredFields(array $requiredFields, string $method = 'POST') 
 // Inicia la sesión PHP si aún no está iniciada (necesario para la autenticación basada en sesión)
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+}
+
+/**
+ * Verifica si el usuario está autenticado
+ * @return bool
+ */
+function isAuthenticated() {
+    return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+}
+
+/**
+ * Obtiene el ID del usuario actual
+ * @return int|null
+ */
+function getCurrentUserId() {
+    return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 }
 ?>

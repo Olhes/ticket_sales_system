@@ -1,7 +1,7 @@
 <?php
 // classes/Database.php
 //Clase para la conexion a la base de datos
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/databases.php';
 
 class Database {
     private $host = DB_HOST;
