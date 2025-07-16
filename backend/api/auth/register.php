@@ -23,7 +23,8 @@ $data = validateRequiredFields(['name', 'email', 'password'], 'POST');
 $auth = new Auth($db);
 
 if ($auth->register($data['name'], $data['email'], $data['password'])) {
-    sendResponse([], "Usuario registrado exitosamente.");
+    header('Location: login.php'); // Redirige al login después de un registro exitoso
+    exit; // Asegúrate de salir después de redirigir
 } else {
     sendError("Error al registrar usuario. El email podría ya estar en uso o hubo un error de DB.", 409);
 }

@@ -22,7 +22,7 @@ $data = validateRequiredFields(['email', 'password'], 'POST');
 $auth = new Auth($db);
 
 if ($user_data = $auth->login($data['email'], $data['password'])) {
-    sendResponse($user_data, "Inicio de sesión exitoso.");
+    header('Location: dashboard.php');
 } else {
     sendError("Email o contraseña incorrectos.", 401);
 }
