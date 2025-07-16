@@ -1,0 +1,473 @@
+/* Basic Resets and Body Styling */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Navigation Bar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-weight: bold;
+    font-size: 24px;
+    color: #0070e0; /* Expedia blue */
+    margin-right: 20px;
+}
+
+.navbar-menu ul {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navbar-menu li a i {
+    margin-left: 5px;
+    font-size: 10px;
+}
+
+.navbar-right ul {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-right li a {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.navbar-right li a i {
+    margin-right: 5px;
+}
+
+.flag-icon {
+    width: 20px;
+    height: auto;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+/* --- Hero Section with Search Form --- */
+.hero-section {
+    background: url('https://via.placeholder.com/1920x600/203040/ffffff?text=Stunning+Travel+Destination') no-repeat center center/cover;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* To contain the pseudo-element overlay */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* Dark overlay */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.search-form-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    text-align: left;
+    color: #333;
+}
+
+.search-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #555;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.tab-button i {
+    margin-right: 8px;
+}
+
+.tab-button.active {
+    color: #0070e0;
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; /* Overlap the border slightly */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #0070e0;
+    border-radius: 2px 2px 0 0;
+}
+
+.search-form {
+    padding: 15px 0;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+}
+
+.input-group label {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.input-group input[type="text"] {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 2px 0;
+    background-color: transparent;
+    color: #333;
+}
+
+.search-button {
+    background-color: #0070e0;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent button from shrinking */
+    transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: #005bb5;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2); /* Make checkbox slightly larger */
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    color: #555;
+}
+
+
+/* --- Hotel Listing Cards Section --- */
+.hotel-listings-section {
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.listings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Align "See more deals" button to the bottom of text */
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.listings-header h2 {
+    font-size: 28px;
+    color: #1a2b3b;
+    margin: 0;
+    flex-grow: 1; /* Allow header to take available space */
+}
+
+.listings-header p {
+    font-size: 16px;
+    color: #666;
+    margin: 0 20px 0 0; /* Add margin to separate from button */
+}
+
+.see-more-button {
+    background-color: #e0f2ff; /* Light blue */
+    color: #0070e0;
+    border: 1px solid #0070e0;
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.see-more-button:hover {
+    background-color: #0070e0;
+    color: #fff;
+}
+
+.hotel-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 25px;
+}
+
+.hotel-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.hotel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.hotel-image {
+    width: 100%;
+    height: 180px; /* Fixed height for images */
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    display: block;
+}
+
+.hotel-info {
+    padding: 15px;
+    flex-grow: 1; /* Allows info section to take remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+.hotel-rating {
+    font-size: 13px;
+    font-weight: 600;
+    color: #008000; /* Green for good ratings */
+    margin-bottom: 8px;
+}
+
+.hotel-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a2b3b;
+    margin: 0 0 5px 0;
+}
+
+.hotel-location {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.hotel-price {
+    display: flex;
+    align-items: baseline;
+    margin-top: auto; /* Push price to the bottom if content above varies */
+    margin-bottom: 5px;
+}
+
+.hotel-price .current-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a2b3b;
+    margin-right: 8px;
+}
+
+.hotel-price .old-price {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.taxes-info {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 15px;
+}
+
+.member-price-button {
+    background-color: #e0f2ff;
+    color: #0070e0;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.member-price-button i {
+    margin-right: 8px;
+}
+
+.member-price-button:hover {
+    background-color: #0070e0;
+    color: #fff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+    .navbar-menu ul, .navbar-right ul {
+        gap: 15px;
+    }
+    .hero-content h1 {
+        font-size: 38px;
+    }
+    .form-row {
+        flex-wrap: wrap; /* Allow form inputs to stack */
+    }
+    .input-group {
+        flex: auto; /* Allow inputs to adjust width */
+        width: 100%; /* Take full width on smaller screens */
+    }
+    .search-button {
+        width: 100%; /* Make button full width */
+        margin-top: 15px; /* Add some space above button */
+    }
+    .listings-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .listings-header p {
+        margin: 0; /* Remove horizontal margin */
+    }
+    .hotel-listings-section {
+        padding: 30px 20px;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-right {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .navbar-menu {
+        display: none; /* Hide main menu on very small screens for simplicity */
+    }
+    .hero-content h1 {
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+    .search-form-container {
+        padding: 15px;
+    }
+    .search-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    .tab-button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    .hotel-cards-container {
+        grid-template-columns: 1fr; /* Stack cards on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-right ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .navbar-right li {
+        margin: 5px;
+    }
+    .hero-section {
+        padding: 80px 0;
+    }
+}

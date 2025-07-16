@@ -129,27 +129,7 @@
             </div> 
             
             <div class="recent-order">
-                <h2>Recent</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Product Number</th>
-                            <th>Payment</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Foldable Mini Drone</td>
-                            <td>85631</td>
-                            <td>Due</td>
-                            <td class="warning">Pending</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a href="">Show All</a>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m46!1m12!1m3!1d4630912.888226397!2d-77.23087960512662!3d-15.770344432364041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m31!3e0!4m5!1s0x915acf5e5e369a43%3A0x11f0aad4a80a8517!2sTacna!3m2!1d-18.0067602!2d-70.2460246!4m5!1s0x9105c5f619ee3ec7%3A0x14206cb9cc452e4a!2sLima!3m2!1d-12.0466888!2d-77.04308859999999!4m5!1s0x91424a487785b9b3%3A0xa3c4a612b9942036!2sArequipa!3m2!1d-16.4057001!2d-71.5400994!4m5!1s0x91449c6d2c3f5113%3A0x48cc99a8ae586b13!2sMoquegua!3m2!1d-17.1882694!2d-70.931795!4m5!1s0x915d6985f4e74135%3A0x1e341dd8f24d32cf!2sPuno!3m2!1d-15.8402218!2d-70.0218805!5e0!3m2!1ses-419!2spe!4v1752707479379!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </main>
     </div>    
