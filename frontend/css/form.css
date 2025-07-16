@@ -15,9 +15,18 @@ body{
     justify-content:center;
     align-items:center;
     min-height: 100vh;
-    background: linear-gradient(90deg,#e2e2e2,#c9d6ff);
+    background-image: url(../images/fbus.webp);
+    background-size: cover;
 }
-
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(226, 226, 226, 0.5), rgba(201, 214, 255, 0.5)); /* Example: 50% opacity */
+    z-index: 0;
+}
 .container{
     position:relative;
     width:850px;
@@ -110,7 +119,7 @@ form{
 .btn{
     width: 100%;
     height:48px;
-    background: #7494ec;
+    background: #FF6961;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
     border:none;
@@ -155,7 +164,7 @@ form{
     left:-250%;
     width:300%;
     height:100%;
-    background:#7494ec;
+    background:#FF6961;
     border-radius: 150px; 
     z-index:2;
     transition: 1.8s ease-in-out;
