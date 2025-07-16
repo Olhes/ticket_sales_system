@@ -12,7 +12,7 @@ CREATE TABLE Usuario (
     Nombre VARCHAR(255) NOT NULL,
     Correo VARCHAR(255) NOT NULL UNIQUE,
     Contraseña VARCHAR(255) NOT NULL
-   Rol VARCHAR(50) NOT NULL DEFAULT 'student'
+    Rol VARCHAR(50) NOT NULL DEFAULT 'student'
     
 );
 

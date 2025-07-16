@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="navbar">
-        <div class="Logo">YOUR WEBSITE</div>
+        <div class="Logo">PakaBussines</div>
         <nav>
             <ul>
                 <li><a href="index.php">Home</a></li>
@@ -23,8 +23,9 @@
 
     <main class="title">
         <div class="content">
-            <h1>BUSES PAKA</h1>
-            <p>Bienvenidos will se la come.com, terminal buses by pakabussines and we hope to like you.
+            <h1>¡BusesCorp!
+            </h1>
+            <p>Bienvenidos a BusesCorp, terminal buses esperamos que les guste.
             </p>
             <a href="form.php" class="get-started2">Get Started</a>
         </div>
