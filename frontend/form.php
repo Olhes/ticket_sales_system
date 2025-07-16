@@ -9,7 +9,8 @@
 </head>
 
 <body>
-   <div class="container">
+     <div class="overlay"></div>
+   <div class="container " >
         <div class="form-box login">
             <form action="../backend/api/auth/login.php" method="POST">
                 <div>
