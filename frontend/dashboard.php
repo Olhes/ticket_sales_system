@@ -51,6 +51,107 @@
                 </a>
             </div>
         </aside>
+
+
+        <main>
+            <h1>Dashboard</h1>
+
+            <div class="date">
+                <input type="date">
+            </div>
+
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-icons-sharp">
+                        analytics
+                    </span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Bus Comun</h3>
+                            <h1>$5,024</h1>
+
+                        </div>
+                        <div class="Progress">
+                            <svg>
+                                 
+                            </svg>
+                            <div>
+                                   
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Tipo 1</small>
+                </div>
+                
+                <div class="sales">
+                    <span class="material-icons-sharp">
+                        analytics
+                    </span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Bus Comodo</h3>
+                            <h1>$12,4</h1>
+
+                        </div>
+                        <div class="Progress">
+                            <svg>
+                                 
+                            </svg>
+                            <div>
+                                   
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Tipo 2</small>
+                </div>
+
+                <div class="sales">
+                    <span class="material-icons-sharp">
+                        analytics
+                    </span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Bus de Lujo</h3>
+                            <h1>$30,20</h1>
+
+                        </div>
+                        <div class="Progress">
+                            <svg>
+                                 
+                            </svg>
+                            <div>
+                                   
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Tipo 3</small>
+                </div>
+            </div> 
+            
+            <div class="recent-order">
+                <h2>Recent</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Number</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Foldable Mini Drone</td>
+                            <td>85631</td>
+                            <td>Due</td>
+                            <td class="warning">Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="">Show All</a>
+            </div>
+        </main>
     </div>    
 </body>
 </html>
