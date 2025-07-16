@@ -9,7 +9,8 @@
 </head>
 
 <body>
-   <div class="container">
+     <div class="overlay"></div>
+   <div class="container " >
         <div class="form-box login">
             <form action="../backend/api/auth/login.php" method="POST">
                 <div>
@@ -20,7 +21,7 @@
                     </div>
                     
                     <div class="input-box">
-                        <input  type="text" placeholder="contraseña" required name="password">
+                        <input  type="password" placeholder="contraseña" required name="password">
                         <i class="bx bxs-lock-alt"></i>
                     </div>
 
@@ -57,7 +58,7 @@
 
 
                     <div class="input-box">
-                        <input  type="text" placeholder="contraseña" name="password" required>
+                        <input  type="password" placeholder="contraseña" name="password" required>
                         <i class="bx bxs-lock-alt"></i>
                     </div>
                     
