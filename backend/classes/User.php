@@ -36,14 +36,18 @@ class User {
     /**
      * Busca un usuario por su email.
      * @param string $email
-     * @return array|false Los datos del usuario o false si no se encuentra.
+     * @return array|false 
      */
     public function findByEmail($email) {
-        $query = "SELECT IdUsuario, Nombre, Correo, Contraseña FROM " . $this->table_name . " WHERE correo = :email LIMIT 0,1";
+        $query = "SELECT IdUsuario, Nombre, Correo, Contraseña, Rol FROM " . $this->table_name . " WHERE Correo = :email LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user && !isset($user['Rol'])) {
+            $user['Rol'] = 'user';
+        }
+        return $user;
     }
 
     /**
