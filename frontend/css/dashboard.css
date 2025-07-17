@@ -1,28 +1,31 @@
-:root{
+/* dashboard.css */
+
+/* Variables (optional but good practice for consistency) */
+:root {
     --color-primary:#7380ec;
     --color-danger:#ff7782;
-    --color-succes:#41f1b6;
+    --color-success:#41f1b6;
     --color-warning:#ffbb55;
     --color-white:#fff;
-    --color-ingo-dark:#7d8da1;
+    --color-info-dark:#7d8da1; 
     --color-dark:#363949;
-    --color-light:rgba(132,139,200,0.10);
+    --color-light:rgba(132,139,200,0.18); 
     --color-primary-variant:#677483;
     --color-background:#f6f6f9;
 
     --card-border-radius:2rem;
     --border-radius-1:0.4rem;
     --border-radius-2: 0.8rem;
-    --border-radiu-3:1.2rem;
+    --border-radius-3:1.2rem; 
     
-
     --card-padding:1.8rem;
     --padding-1:1.2rem;
 
-    --box-shadow: 0 2rem 3 rem var(--color-light);
+    --box-shadow: 0 2rem 3rem var(--color-light); 
 }
 
-*{
+/* Universal styles */
+* {
     margin:0;
     padding:0;
     outline:0;
@@ -33,14 +36,14 @@
     box-sizing:border-box;
 }
 
-html{
+html {
     font-size:14px;
 }
 
-body{
+body {
     width:100vw;
     height:100vh;
-    font-family:poppins,sans-serif;
+    font-family: 'Poppins', sans-serif; 
     font-size:0.88rem;
     background: var(--color-background);
     user-select:none;
@@ -48,123 +51,139 @@ body{
     color: var(--color-dark);
 }
 
-.container{
+/* Container for the overall layout - FIXED FOR CENTERING MAIN CONTENT */
+.container {
     display: grid;
-    width: 96%;
-    margin: 0 auto;
     gap:1.8rem;
-    grid-template-columns:14rem auto 23rem;
+    
+    /* MODIFIED: Sidebar column width adjusted to 15rem, removed the 1rem spacer column. */
+    /* This makes the sidebar slightly larger and shifts the content to the left. */
+    /* Main content column adjusted to start earlier. */
+    grid-template-columns: 15rem minmax(auto, 1000px) 1fr 23rem; /* Sidebar, Main content, flexible empty space, Right */
+    
+    max-width: 1400px; 
+    margin: 0 auto; 
 }
 
-a{
+/* General Link, Image, and Heading styles */
+a {
     color:var(--color-dark);
 }
 
-img{
+img {
     display:block;
-    width:100%;
+    width:100%; 
 }
 
-h1{
+h1 {
     font-weight:800;
     font-size:1.8rem;
 }
 
-h2{
+h2 {
     font-size:1.4rem;
 }
 
-h3{
+h3 {
     font-size:0.87rem;
 }
 
-h4{
+h4 {
     font-size:0.8rem;
 }
-h5{
-        font-size:0.77rem;
+h5 {
+    font-size:0.77rem;
 }
 
-small{
+small {
     font-size:0.75rem;
 }
 
-.profile-photo{
+.profile-photo {
     width:2.8rem;
     height:2.8rem;
     border-radius:50%;
     overflow:hidden;
 }
 
-.text-muted{
-    color: var(--color-info-dark)
+.text-muted {
+    color: var(--color-info-dark);
 }
 
- 
-p{
-    color: var(--color-dark-variant);
+p {
+    /* Corrected variable name, assuming you meant info-dark for paragraphs */
+    color: var(--color-info-dark); 
 }
-b{
+b {
     color:var(--color-dark);
 }
 
-.primary{
+.primary {
     color: var(--color-primary);
-
 }
 
-.danger{
-    color: var(--colo-danger);
+.danger {
+    color: var(--color-danger); 
 }
 
-.warning{
-    color: var(--colo-warning);
+.warning {
+    color: var(--color-warning); 
 }
 
-.succes{
-    color: var(--colo-succes);
+.success { 
+    color: var(--color-success); 
 }
 
+aside {
+    height: 100vh; 
+    /* MODIFIED: Aside now spans only the first column, which is now 15rem */
+    grid-column: 1 / span 1; 
+    /* NEW: Add padding to the right for spacing within the sidebar */
+    padding-right: 1rem; /* Adjust this value to control spacing from content */
+}
 
-aside .top{
-    background:white;
+aside .top {
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-top: 1.4rem;   
+    margin-top: 1.4rem;
 }
 
-aside .logo{
+aside .logo {
     display:flex;
     gap:0.8rem;
 }
-aside .logo img{
-    width: 5rem;
-    height: 5rem;
+aside .logo img {
+    width: 5rem; 
+    height: 5rem; 
 }
 
-aside .close{
-    display:none;
+aside .close {
+    display:none; 
 }
 
-
-aside .sidebar{
-    background:white;
+aside .sidebar {
+    /* MODIFIED: Added gradient background */
+    background: linear-gradient(to bottom, #f0f0f5, var(--color-white)); /* Example gradient */
+    /* You can adjust the colors and direction of the gradient */
+    /* For instance: linear-gradient(to right, var(--color-primary), var(--color-info-dark)); */
     display:flex;
     flex-direction:column;
     height:86vh;
     position:relative;
     top:3rem;
+    border-radius: var(--card-border-radius); /* Apply border-radius to the sidebar itself */
+    box-shadow: var(--box-shadow); /* Optional: add shadow to sidebar */
 }
 
-aside h3{
+aside h3 {
     font-weight: 500;
 }
 
-aside .sidebar a{
+aside .sidebar a {
     display:flex;
-    color:var(--clor-info-dark);
-    margin:2rem;
+    color:var(--color-info-dark); 
+    margin-left:2rem; 
     gap:1rem;
     align-items:center;
     position:relative;
@@ -172,123 +191,149 @@ aside .sidebar a{
     transition: all 300ms ease;
 }
 
-aside .sidebar a span{
+aside .sidebar a span {
     font-size: 1.6rem;
-    transition: all 300ms ease
+    transition: all 300ms ease;
 }
 
-aside .sidebar a:last-child{
+aside .sidebar a:last-child {
     position:absolute;
     bottom:2rem;
-    width:100%
+    width:100%;
 }
 
-aside .sidebar a.active{
+aside .sidebar a.active {
     background: var(--color-light);
     color: var(--color-primary);
     margin-left:0;
 }
 
-aside .sideba a.active:before{
+aside .sidebar a.active::before { 
     content: "";
     width: 6px;
     height: 100%;
     background:var(--color-primary);
+    position: absolute; 
+    left: 0; 
 }
 
-aside .sidebar a.active span{
-    color: var(--color-rimary);
-    margin-left: calc(1rem-6px);
+aside .sidebar a.active span {
+    color: var(--color-primary); 
+    margin-left: calc(1rem + 6px); 
 }
 
-aside .sidebar a:hover{
+aside .sidebar a:hover {
     color: var(--color-primary);
 }
 
-aside .sidebar a:hover span{
+aside .sidebar a:hover span {
     margin-left:1rem;
 }
 
-main{
+/* Main Content Styles - FIXED FOR CENTERING */
+main {
     margin-top:1.4rem;
+    /* MODIFIED: Main now starts at column 2 (after the 15rem sidebar) */
+    grid-column: 2 / span 1; 
 }
 
-main .date{
+main .date {
     display:inline-block;
     background: var(--color-light);
     border-radius: var(--border-radius-1);
     margin-top: 1rem;
     padding: 0.5rem 1.6rem;
-
 }
 
-main .date input[type='date']{
+main .date input[type='date'] {
     background: transparent;
     color: var(--color-dark);
-
 }
 
-main .insights{
+main .insights {
     display:grid;
-    grid-template-columns: repeat(3,1fr);
-    gap:10rem;
+    grid-template-columns: repeat(3,1fr); 
+    gap:1.6rem; 
+    
+    max-width: 900px; 
+    margin-left: auto; 
+    margin-right: auto;
 }
 
-
-main .insights >div{
+main .insights > div {
     background: var(--color-white);
     padding: var(--card-padding);
-    border-radius: var(--card-boder-radius);
+    border-radius: var(--card-border-radius); 
     margin-top: 1rem;
-    box-shadow:var(--box-sadow);
+    box-shadow:var(--box-shadow); 
     transition: all 300ms ease;
+    text-align: center; 
 }
 
-main .insights > div:hover{
+main .insights > div:hover {
     box-shadow:none;
 }
 
-main .insights > div span{
-    background: coral;
-    padding:0.5rem;
-    border:0.5rem;
-    color:var(--color-white);
-    font-size:2rem;
+main .insights > div img { 
+    width: 20rem; 
+    height: 16rem;
+    margin: 0 auto 1rem; 
+    display: block;
+    border-radius: 0.8rem; 
+    object-fit:cover; 
 }
 
-main .inishgts > div.expenses span{
+main .insights > div span {
+    background: coral; 
+    padding:0.5rem;
+    border-radius:50%; 
+    color:var(--color-white);
+    font-size:2rem;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    width: 3rem; 
+    height: 3rem;
+    margin-bottom: 1rem;
+}
+
+main .insights > div.sales span { 
+    background: var(--color-primary); 
+}
+
+main .insights > div.expenses span { 
     background: var(--color-danger);
 }
 
-main .inishgts > div.expenses span{
+main .insights > div.income span { 
     background: var(--color-success);
 }
 
-main .insights > div .middle{
+main .insights > div .middle {
     display:flex;
     align-items:center;
     justify-content:space-between;
+    margin-top: 1rem; 
 }
 
-main .insights h3{
-    margin: 1rem 0 0.6rem;
+main .insights h3 {
+    margin: 0; 
     font-size:1rem;
 }
 
-main .insights .progress{
+main .insights .Progress { 
     position:relative;
     width: 92px;
     height: 92px;
     border-radius:50%;
 }
 
-main .insights svg{
-
-width: 7rem;
-height: 7rem;
+main .insights svg {
+    width: 7rem;
+    height: 7rem;
 }
 
-main .insights svg circle{
+main .insights svg circle {
     fill: none;
     stroke: var(--color-primary);
     stroke-width:14;
@@ -298,10 +343,10 @@ main .insights svg circle{
     stroke-dashoffset:92;
 }
 
-main .insihts .progress .number{
+main .insights .Progress .number { 
     position: absolute;
     top:0;
-    left:9;
+    left:0; 
     height: 100%;
     width:100%;
     display:flex;
@@ -309,33 +354,154 @@ main .insihts .progress .number{
     align-items:center;
 }
 
-
-main .insights small{
+main .insights small {
     margin-top: 1.3rem;
     display:block;
 }
 
-main .recent-orders{
+/* Recent Orders (Map iframe) styles - FIXED FOR CENTERING */
+main .recent-order { 
     margin-top:2rem;
-
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    overflow: hidden; 
+    
+    max-width: 900px; 
+    margin-left: auto; 
+    margin-right: auto;
 }
 
-main .recent-orders h2{
+main .recent-order:hover {
+    box-shadow:none;
+}
+
+main .recent-order h2 { 
     margin-bottom: 0.8rem;
 }
 
-
-main .recent-orders table{
-    background: var(--color-white);
-    width:100%;
-    border-radius: var(--card-border-radius);
-    padding:var(--card-padding);
-    text-align:center;
-    box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
+main .recent-order iframe { 
+    width: 100%; 
+    height: 450px; 
+    border-radius: var(--border-radius-2); 
 }
 
-main .recent-orders table:hover{
-    box-shadow:none;
+/* Media Queries - FIXED FOR CENTERING */
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 94%; 
+        /* MODIFIED: Adjusted grid-template-columns for tablet view, sidebar 7rem now */
+        grid-template-columns: 7rem 1fr 1fr 23rem; /* Sidebar, Main, flexible empty space, Right */
+    }
+
+    aside {
+        grid-column: 1 / span 1; /* Sidebar is now just the first column */
+        padding-right: 0.5rem; /* Reduce padding for smaller screen */
+    }
+
+    aside .sidebar h3 {
+        display: none; 
+    }
+
+    aside .sidebar a {
+        width: 5.6rem; 
+    }
+
+    aside .sidebar a:last-child {
+        position: relative; 
+        margin-top: 1.8rem; 
+    }
+
+    main {
+        grid-column: 2 / span 1; /* Main starts at column 2 */
+    }
+
+    main .insights {
+        grid-template-columns: 1fr; 
+        gap: 1.6rem;
+        max-width: 500px; 
+        margin: 0 auto; 
+    }
+
+    main .recent-order {
+        width: 94%; 
+        margin: 2rem auto 0; 
+    }
+
+    .right { 
+        width: 94%;
+        margin: 2rem auto 0;
+        grid-column: 4 / span 1; /* Right column is now the 4th */
+    }
+}
+
+/* Mobile View (up to 768px approx) */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%; 
+        grid-template-columns: 1fr; 
+    }
+
+    aside {
+        position: fixed; 
+        left: -100%; 
+        background: var(--color-white); /* Mobile sidebar can still have gradient or just white */
+        width: 18rem;
+        height: 100vh;
+        z-index: 3; 
+        box-shadow: 1rem 3rem 4rem var(--color-light);
+        display: none; 
+        animation: showMenu 500ms ease forwards; 
+        grid-column: 1 / span 1; 
+        padding-right: 0; /* No need for right padding on mobile fixed sidebar */
+    }
+
+    aside .logo h2 span {
+        display: inline; 
+    }
+
+    aside .sidebar h3 {
+        display: inline; 
+    }
+
+    aside .sidebar a {
+        width: 100%; 
+        height: 3.9rem;
+        margin-left: 2rem; 
+    }
+
+    aside .top .close {
+        display: inline-block; 
+        cursor: pointer;
+    }
+
+    main {
+        margin-top: 6rem; 
+        padding: 0 1rem; 
+        grid-column: 1 / span 1; 
+    }
+
+    main .insights {
+        grid-template-columns: 1fr; 
+        max-width: 100%; 
+        margin: 0 auto; 
+    }
+
+    main .recent-order {
+        width: 100%; 
+        padding: 1rem; 
+    }
     
+    .right {
+        grid-column: 1 / span 1;
+        padding: 0 1rem; 
+    }
+}
+
+@keyframes showMenu {
+    to {
+        left: 0;
+    }
 }

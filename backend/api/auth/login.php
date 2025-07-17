@@ -32,6 +32,7 @@ if (!$userData) {
     sendError('No existe una cuenta con ese correo.', 404);
 }
 
+
 if (!password_verify($data['password'], $userData['Contraseña'])) {
     error_log('Login fallido: contraseña incorrecta para ' . $data['email'] .
         ' | Hash esperado: ' . $userData['Contraseña'] .
