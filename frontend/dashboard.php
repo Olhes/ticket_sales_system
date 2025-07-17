@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp&display=swap">
     <link rel="stylesheet" href="./css/dashboard.css">
-    <title>DASHBOARD</title>
+    <title>DASHBOARD </title>
     <script>
         if (!sessionStorage.getItem('user')) {
             window.location.href = 'form.php';
