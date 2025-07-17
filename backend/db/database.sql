@@ -4,6 +4,8 @@ USE SISTEMADEBUSES;
 
 CREATE TABLE Terminal (
     IdTerminal INT PRIMARY KEY AUTO_INCREMENT,
+    IdTerminalOrigen INT NOT NULL,
+    IdTerminalDestino INT NOT NULL,
     Nombre VARCHAR(255) NOT NULL,
     Direccion VARCHAR(255)
 );
@@ -58,7 +60,6 @@ CREATE TABLE Horario (
     FechaSalida DATE NOT NULL,
     HoraSalida TIME NOT NULL,
     HoraLlegada TIME,
-    PrecioBase DECIMAL(10, 2) NOT NULL,
     IdBus INT NOT NULL,
     IdRuta INT NOT NULL,
     IdConductor INT NOT NULL,

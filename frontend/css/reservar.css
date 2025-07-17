@@ -1,4 +1,4 @@
-/* General styling (existing) */
+/* General layout for navbar (can be shared with other pages if desired) */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -56,267 +56,154 @@ body {
     background-color: #0056b3;
 }
 
+/* Hero Section Styles */
 .hero-section {
+    background: url('https://source.unsplash.com/1600x900/?bus,travel,road') no-repeat center center/cover; /* Imagen de fondo de bus */
+    color: white;
+    text-align: center;
+    padding: 80px 20px; /* Reduce un poco el padding si es muy grande */
     position: relative;
-    height: 500px; /* Adjust as needed */
-    background: url('https://via.placeholder.com/1500x500/0000FF/FFFFFF?text=Travel+Background') no-repeat center center/cover;
-    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    min-height: 70vh; /* Altura mínima para que se vea bien */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay oscuro para mejor legibilidad del texto */
+    z-index: 0;
 }
 
 .hero-content {
-    background-color: rgba(0,0,0,0.5); /* Dark overlay for text readability */
-    padding: 2rem 4rem;
-    border-radius: 10px;
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté sobre el overlay */
+    max-width: 900px; /* Limita el ancho del contenido principal */
+    width: 100%;
 }
 
 .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
+/* Search Form Styles */
 .search-form-container {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    width: 90%;
-    max-width: 900px;
-    margin: 0 auto;
-    color: #333; /* Text inside form container */
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo semitransparente para el formulario */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
-.search-form .form-row {
+.search-form {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 1rem;
-    margin-bottom: 1rem;
-    justify-content: center; /* Center items for better appearance */
+    flex-direction: column;
+    gap: 20px; /* Espacio entre filas */
 }
 
-.search-form .input-group {
-    flex: 1;
-    min-width: 200px; /* Minimum width for each input group */
+.form-row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    gap: 15px; /* Espacio entre elementos en la misma fila */
+    justify-content: center; /* Centra los elementos */
+}
+
+.input-group {
+    flex: 1; /* Distribuye el espacio equitativamente entre los grupos */
+    min-width: 220px; /* Ancho mínimo para cada input group */
     display: flex;
     flex-direction: column;
 }
 
-.search-form label {
+.input-group label {
+    margin-bottom: 8px;
     font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #555;
+    color: #444; /* Color más oscuro para las etiquetas */
+    text-align: left;
 }
 
-.search-form input[type="text"],
-.search-form input[type="date"] {
-    width: 100%;
-    padding: 0.8rem;
+.input-group select,
+.input-group input[type="date"],
+.input-group input[type="time"] {
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box; /* Include padding in width */
-    cursor: pointer; /* Indicate clickability for pop-ups */
-}
-
-.search-form .search-button {
-    padding: 1rem 2rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    align-self: flex-end; /* Align button to the bottom of its row */
-}
-
-.search-form .search-button:hover {
-    background-color: #0056b3;
-}
-
-.search-form .checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: center; /* Center the checkbox */
-}
-
-/* Modals */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    position: relative;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    width: 100%;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+    background-color: #fcfcfc; /* Un fondo ligeramente diferente para inputs */
     color: #333;
 }
 
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* City Modal Specifics */
-#citySearchInput {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.city-list {
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    margin-bottom: 15px;
-}
-
-.city-item {
-    padding: 10px 15px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-}
-
-.city-item:last-child {
-    border-bottom: none;
-}
-
-.city-item:hover {
-    background-color: #f0f0f0;
-}
-
-.city-item.selected {
-    background-color: #e0f7fa; /* Light blue background for selected city */
-    font-weight: bold;
-    color: #007bff;
-}
-
-.modal-select-button {
-    display: block;
-    width: 100%;
-    padding: 10px 20px;
+.search-button {
     background-color: #007bff;
     color: white;
+    padding: 15px 30px;
     border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 6px;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex-grow: 1;
+    min-width: 200px; /* Ancho mínimo para el botón */
+    margin-top: 10px; /* Espacio superior para separar del último input */
 }
 
-.modal-select-button:hover {
+.search-button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px); /* Pequeño efecto al pasar el ratón */
 }
 
-/* Travelers Modal Specifics */
-.traveler-counter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.traveler-counter button {
-    background-color: #eee;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-.traveler-counter button:hover {
-    background-color: #ddd;
-}
-
-
-/* Media Queries for responsiveness */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .form-row {
+        flex-direction: column; /* Apila los inputs en pantallas pequeñas */
+        align-items: stretch; /* Estira los elementos para que ocupen todo el ancho */
+    }
+    .input-group {
+        min-width: unset; /* Elimina el ancho mínimo para permitir que se estiren */
+        width: 100%; /* Ocupa todo el ancho disponible */
+    }
+    .search-button {
+        width: 100%; /* El botón también ocupa todo el ancho */
+    }
+}
+
+@media (max-width: 480px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
+        padding: 1rem;
     }
-
     .navbar nav ul {
-        margin-top: 10px;
         flex-direction: column;
         width: 100%;
-        text-align: center;
     }
-
     .navbar nav ul li {
-        margin: 5px 0;
+        margin: 10px 0;
     }
-
     .get-started1 {
         margin-top: 10px;
         width: 100%;
         text-align: center;
     }
-
+    .hero-section {
+        padding: 60px 15px;
+    }
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
-
-    .search-form .form-row {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .search-form .input-group {
-        min-width: unset; /* Remove min-width on small screens */
-    }
-
-    .search-form .search-button {
-        width: 100%;
+    .search-form-container {
+        padding: 20px;
     }
 }

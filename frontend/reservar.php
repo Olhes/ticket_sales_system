@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expedia-like Layout</title>
+    <title>Buscar y Reservar Pasajes</title>
     <link rel="stylesheet" href="./css/reservar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -20,78 +20,83 @@
                 <li><a href="index.php">Info</a></li>
             </ul>
         </nav>
-
         <a href="form.php" class="get-started1">Get Started</a>
     </header>
 
     <section class="hero-section">
         <div class="hero-content">
-            <h1>¡BusesCorp!</h1>
+            <h1>¡Encuentra tu Pasaje Ideal!</h1>
             <div class="search-form-container">
-                <form class="search-form" action="seat_selection.php" method="GET"> <div class="form-row">
-                        <div class="input-group" id="from-input-group">
-                            <label for="from">From</label>
-                            <input type="text" id="from" name="from" placeholder="Origin City" readonly>
+                <form class="search-form" action="seat.php" method="GET">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="from">Origen:</label>
+                            <select id="from" name="from" required>
+                                <option value="">Selecciona Origen</option>
+                                <option value="Tacna">Tacna</option>
+                                <option value="Arequipa">Arequipa</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Cusco">Cusco</option>
+                                <option value="Puno">Puno</option>
+                            </select>
                         </div>
-                        <div class="input-group" id="destination-input-group">
-                            <label for="destination">Where to?</label>
-                            <input type="text" id="destination" name="destination" placeholder="Destination City" readonly>
+
+                        <div class="input-group">
+                            <label for="destination">Destino:</label>
+                            <select id="destination" name="destination" required>
+                                <option value="">Selecciona Destino</option>
+                                <option value="Tacna">Tacna</option>
+                                <option value="Arequipa">Arequipa</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Cusco">Cusco</option>
+                                <option value="Puno">Puno</option>
+                            </select>
                         </div>
-                        <div class="input-group" id="dates-input-group">
-                            <label for="dates">Dates</label>
-                            <input type="text" id="dates" name="dates" placeholder="Select Dates" readonly>
+
+                        <div class="input-group">
+                            <label for="empresa">Empresa:</label>
+                            <select id="empresa" name="empresa">
+                                <option value="">Cualquier Empresa</option>
+                                <option value="Cruz del Sur">Cruz del Sur</option>
+                                <option value="Oltursa">Oltursa</option>
+                                <option value="Civa">Civa</option>
+                            </select>
                         </div>
-                        <div class="input-group" id="travelers-input-group">
-                            <label for="travelers">Travelers</label>
-                            <input type="text" id="travelers" name="travelers" value="1 traveler" readonly>
-                            <input type="hidden" id="num-travelers" name="num_travelers" value="1">
+
+                        <div class="input-group">
+                            <label for="tipo_bus">Tipo de Bus:</label>
+                            <select id="tipo_bus" name="tipo_bus">
+                                <option value="">Cualquier Tipo</option>
+                                <option value="Común">Común</option>
+                                <option value="Cómodo">Cómodo</option>
+                                <option value="Lujo">Lujo</option>
+                            </select>
                         </div>
-                        <button type="submit" class="search-button">Search</button>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="bundle-save">
-                        <label for="bundle-save">Add a flight to bundle & Save</label>
+
+                        <div class="input-group">
+                            <label for="fecha_salida">Fecha Salida:</label>
+                            <input type="date" id="fecha_salida" name="fecha_salida" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="hora_salida">Hora Salida:</label>
+                            <input type="time" id="hora_salida" name="hora_salida">
+                        </div>
+
+                        <button type="submit" class="search-button">Buscar Horarios</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
 
-    <div id="cityModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Select City</h2>
-            <input type="text" id="citySearchInput" placeholder="Search for a city...">
-            <div id="cityList" class="city-list">
-                <div class="city-item" data-city="Tacna">Tacna</div>
-                <div class="city-item" data-city="Arequipa">Arequipa</div>
-                <div class="city-item" data-city="Lima">Lima</div>
-                <div class="city-item" data-city="Cusco">Cusco</div>
-                <div class="city-item" data-city="Puno">Puno</div>
-                <div class="city-item" data-city="Juliaca">Juliaca</div>
-                <div class="city-item" data-city="Moquegua">Moquegua</div>
-                <div class="city-item" data-city="Ica">Ica</div>
-                <div class="city-item" data-city="Nazca">Nazca</div>
-                <div class="city-item" data-city="Paracas">Paracas</div>
-            </div>
-            <button id="selectCityButton" class="modal-select-button">Select</button>
-        </div>
-    </div>
-
-    <div id="travelersModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Travelers</h2>
-            <div class="traveler-counter">
-                <button id="decrementTravelers">-</button>
-                <span id="travelerCount">1</span>
-                <button id="incrementTravelers">+</button>
-            </div>
-            <button id="doneTravelersButton" class="modal-select-button">Done</button>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="./js/reservar.js"></script>
+    <script>
+        // Inicializar Flatpickr para el campo de fecha
+        flatpickr("#fecha_salida", {
+            dateFormat: "Y-m-d",
+            minDate: "today" // No permite seleccionar fechas pasadas
+        });
+    </script>
 </body>
 </html>
