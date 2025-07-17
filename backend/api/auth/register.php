@@ -32,8 +32,9 @@ if ($user->findByEmail($data['email'])) {
 
 $password_hash = password_hash($data['password'], PASSWORD_DEFAULT);
 if ($user->create($data['name'], $data['email'], $password_hash)) {
-    sendResponse([], 'Usuario registrado exitosamente');
+    sendResponse([$data['name'], $data['email']], 'Usuario registrado exitosamente');
 } else {
     sendError('Error al registrar usuario', 500);
 }
+header("Location: ../../../frontend/tomarfecha.php")
 ?>

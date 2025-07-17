@@ -24,14 +24,13 @@ if (!$auth->isAuthenticated()) {
     sendError("Acceso no autorizado. Inicia sesión.", 401);
 }
 
-$data = validateRequiredFields(['route_id', 'date'], 'GET');
+$data = validateRequiredFields(['origen', 'destino', 'fecha'], 'GET');
 
 $schedule = new Schedule($db);
-$schedules = $schedule->findByRouteAndDate($data['route_id'], $data['date']);
+$schedules = $schedule->getASchedule($data['origen'], $data['destino'], $data['fecha']);
 
-if ($schedules) {
-    sendResponse($schedules, "Horarios obtenidos exitosamente.");
-} else {
+if (empty($schedules)) {
     sendError("No se encontraron horarios para la ruta y fecha especificadas.", 404);
 }
+
 ?>
