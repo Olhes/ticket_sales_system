@@ -36,7 +36,7 @@ class User {
     /**
      * Busca un usuario por su email.
      * @param string $email
-     * @return array|false Los datos del usuario o false si no se encuentra.
+     * @return array|false 
      */
     public function findByEmail($email) {
         $query = "SELECT IdUsuario, Nombre, Correo, Contraseña FROM " . $this->table_name . " WHERE correo = :email LIMIT 0,1";
