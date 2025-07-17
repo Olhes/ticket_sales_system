@@ -18,65 +18,41 @@ ul {
     padding: 0;
 }
 
-/* --- Navigation Bar --- */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 10px 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 20px 5%;
+    background-color:#fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.navbar-left, .navbar-right {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-logo {
-    font-weight: bold;
-    font-size: 24px;
-    color: #0070e0; /* Expedia blue */
-    margin-right: 20px;
-}
-
-.navbar-menu ul {
-    display: flex;
-    gap: 20px;
-}
-
-.navbar-menu li a {
-    display: flex;
-    align-items: center;
-    padding: 8px 0;
+.navbar .Logo{
+    font-weight: 700;
+    font-size: 1.2em;
     color: #333;
-    font-size: 14px;
-    font-weight: 500;
+}
+.navbar nav ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+}
+.navbar ul li{
+    margin-left: 30px;
 }
 
-.navbar-menu li a i {
-    margin-left: 5px;
-    font-size: 10px;
+.navbar nav ul li a{
+    text-decoration:none;
+    color:#555;
+    font-weight:600;
+    transition: color 0.3s ease;
 }
 
-.navbar-right ul {
-    display: flex;
-    gap: 20px;
+.navbar nav ul li a:hover{
+    color: #ff6b6b;
 }
 
-.navbar-right li a {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #555;
-}
-
-.navbar-right li a i {
-    margin-right: 5px;
-}
 
 .flag-icon {
     width: 20px;
@@ -87,7 +63,6 @@ ul {
 
 /* --- Hero Section with Search Form --- */
 .hero-section {
-    background: url('https://via.placeholder.com/1920x600/203040/ffffff?text=Stunning+Travel+Destination') no-repeat center center/cover;
     color: #fff;
     padding: 100px 0;
     text-align: center;
@@ -98,18 +73,19 @@ ul {
 .hero-section::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3); /* Dark overlay */
-    z-index: 1;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 107, 107, 0.1); 
+    border-radius: 50%;
+    z-index: 0;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 960px;
+    max-width: 900px;    
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -118,6 +94,9 @@ ul {
     font-size: 48px;
     margin-bottom: 40px;
     font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .search-form-container {
@@ -184,6 +163,7 @@ ul {
     border-radius: 6px;
     padding: 10px 15px;
     background-color: #f9f9f9;
+    width: 100px;
 }
 
 .input-group label {
@@ -202,7 +182,7 @@ ul {
 }
 
 .search-button {
-    background-color: #0070e0;
+    background-color: #ff6b6b;
     color: #fff;
     border: none;
     border-radius: 6px;

@@ -9,33 +9,25 @@
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="navbar-left">
-            <a href="#" class="navbar-logo">Expedia</a>
-            <nav class="navbar-menu">
-                <ul>
-                    <li><a href="#">Shop travel <i class="fas fa-chevron-down"></i></a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="navbar-right">
+  <header class="navbar">
+        <div class="Logo">PakaBussines</div>
+        <nav>
             <ul>
-                <li><a href="#">USD <i class="fas fa-chevron-down"></i></a></li>
-                <li><a href="#"><img src="https://flagcdn.com/us.svg" alt="US Flag" class="flag-icon"></a></li>
-                <li><a href="#">List your property</a></li>
-                <li><a href="#">Support</a></li>
-                <li><a href="#">Trips</a></li>
-                <li><a href="#"><i class="fas fa-bell"></i></a></li>
-                <li><a href="#"><i class="fas fa-user-circle"></i> Sign in</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php">About us</a></li>
+                <li><a href="form.php">Login</a></li>
+                <li><a href="index.php">Info</a></li>
             </ul>
-        </div>
+        </nav>
+
+        <a href="form.php" class="get-started1">Get Started</a>
     </header>
 
     <section class="hero-section">
         <div class="hero-content">
-            <h1>Made to Travel</h1>
+            <h1>¡BusesCorp!</h1>
             <div class="search-form-container">
-                <div class="search-tabs">
+                <!--<div class="search-tabs">
                     <button class="tab-button active">
                         <i class="fas fa-bed"></i> Stays
                     </button>
@@ -54,9 +46,13 @@
                     <button class="tab-button">
                         <i class="fas fa-ship"></i> Cruises
                     </button>
-                </div>
+                </div> -->
                 <form class="search-form">
                     <div class="form-row">
+                        <div class="input-group">
+                            <label for="from">"From</label>
+                            <input type="text" id="from" placeholder="From">
+                        </div>
                         <div class="input-group">
                             <label for="destination">Where to?</label>
                             <input type="text" id="destination" placeholder="Going to">
@@ -79,7 +75,7 @@
             </div>
         </div>
     </section>
-
+    <!--
     <section class="hotel-listings-section">
         <div class="listings-header">
             <h2>Save up to 40%: Book by July 21</h2>
@@ -148,6 +144,7 @@
             </div>
         </div>
     </section>
+    -->
 
 </body>
 </html>
