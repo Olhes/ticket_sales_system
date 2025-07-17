@@ -1,0 +1,169 @@
+/* General layout for navbar (can be shared with reservar.css) */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.Logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.navbar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar nav ul li {
+    margin-left: 20px;
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+    color: #007bff;
+}
+
+.get-started1 {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.get-started1:hover {
+    background-color: #0056b3;
+}
+
+/* Boleta Specific Styles */
+.boleta-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.boleta-container h1 {
+    color: #007bff;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+}
+
+.boleta-details {
+    text-align: left;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.boleta-details p {
+    margin: 0.5rem 0;
+}
+
+.boleta-details strong {
+    color: #333;
+    display: inline-block;
+    width: 150px; /* Align labels */
+}
+
+.boleta-details hr {
+    border: 0;
+    border-top: 1px dashed #ccc;
+    margin: 1.5rem 0;
+}
+
+.price-info {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.total-price {
+    font-size: 1.6rem;
+    color: #28a745; /* Green for total price */
+    margin-top: 1rem;
+}
+
+.boleta-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.boleta-footer p {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.print-button, .back-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* For the anchor tag */
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.print-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.print-button:hover {
+    background-color: #0056b3;
+}
+
+.back-button {
+    background-color: #6c757d; /* Grey */
+    color: #fff;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+}
+
+/* Print specific styles */
+@media print {
+    body {
+        background-color: #fff;
+    }
+    .navbar, .print-button, .back-button {
+        display: none; /* Hide elements not relevant for print */
+    }
+    .boleta-container {
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+}

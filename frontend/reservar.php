@@ -6,10 +6,11 @@
     <title>Expedia-like Layout</title>
     <link rel="stylesheet" href="./css/reservar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 
-  <header class="navbar">
+    <header class="navbar">
         <div class="Logo">PakaBussines</div>
         <nav>
             <ul>
@@ -27,43 +28,23 @@
         <div class="hero-content">
             <h1>¡BusesCorp!</h1>
             <div class="search-form-container">
-                <!--<div class="search-tabs">
-                    <button class="tab-button active">
-                        <i class="fas fa-bed"></i> Stays
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-plane"></i> Flights
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-car"></i> Cars
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-box"></i> Packages
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-utensils"></i> Things to do
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-ship"></i> Cruises
-                    </button>
-                </div> -->
-                <form class="search-form">
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="from">"From</label>
-                            <input type="text" id="from" placeholder="From">
+                <form class="search-form" action="seat_selection.php" method="GET"> <div class="form-row">
+                        <div class="input-group" id="from-input-group">
+                            <label for="from">From</label>
+                            <input type="text" id="from" name="from" placeholder="Origin City" readonly>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group" id="destination-input-group">
                             <label for="destination">Where to?</label>
-                            <input type="text" id="destination" placeholder="Going to">
+                            <input type="text" id="destination" name="destination" placeholder="Destination City" readonly>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group" id="dates-input-group">
                             <label for="dates">Dates</label>
-                            <input type="text" id="dates" value="Jul 17 - Jul 22" readonly>
+                            <input type="text" id="dates" name="dates" placeholder="Select Dates" readonly>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group" id="travelers-input-group">
                             <label for="travelers">Travelers</label>
-                            <input type="text" id="travelers" value="2 travelers, 1 room" readonly>
+                            <input type="text" id="travelers" name="travelers" value="1 traveler" readonly>
+                            <input type="hidden" id="num-travelers" name="num_travelers" value="1">
                         </div>
                         <button type="submit" class="search-button">Search</button>
                     </div>
@@ -75,76 +56,42 @@
             </div>
         </div>
     </section>
-    <!--
-    <section class="hotel-listings-section">
-        <div class="listings-header">
-            <h2>Save up to 40%: Book by July 21</h2>
-            <p>Showing deals for Aug 1 - Aug 3</p>
-            <button class="see-more-button">See more deals</button>
+
+    <div id="cityModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Select City</h2>
+            <input type="text" id="citySearchInput" placeholder="Search for a city...">
+            <div id="cityList" class="city-list">
+                <div class="city-item" data-city="Tacna">Tacna</div>
+                <div class="city-item" data-city="Arequipa">Arequipa</div>
+                <div class="city-item" data-city="Lima">Lima</div>
+                <div class="city-item" data-city="Cusco">Cusco</div>
+                <div class="city-item" data-city="Puno">Puno</div>
+                <div class="city-item" data-city="Juliaca">Juliaca</div>
+                <div class="city-item" data-city="Moquegua">Moquegua</div>
+                <div class="city-item" data-city="Ica">Ica</div>
+                <div class="city-item" data-city="Nazca">Nazca</div>
+                <div class="city-item" data-city="Paracas">Paracas</div>
+            </div>
+            <button id="selectCityButton" class="modal-select-button">Select</button>
         </div>
-        <div class="hotel-cards-container">
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/e0e0e0/ffffff?text=Hotel+Image+1" alt="Alrazi Hotel" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">8.0 Very Good (98 reviews)</div>
-                    <h3 class="hotel-name">Alrazi Hotel</h3>
-                    <p class="hotel-location">Istanbul</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$198 nightly</span>
-                        <span class="old-price">$260</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
-            </div>
+    </div>
 
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/d0d0d0/ffffff?text=Hotel+Image+2" alt="Divan Istanbul" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">9.2 Wonderful (114 reviews)</div>
-                    <h3 class="hotel-name">Divan Istanbul</h3>
-                    <p class="hotel-location">Istanbul</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$385 nightly</span>
-                        <span class="old-price">$614</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
+    <div id="travelersModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Travelers</h2>
+            <div class="traveler-counter">
+                <button id="decrementTravelers">-</button>
+                <span id="travelerCount">1</span>
+                <button id="incrementTravelers">+</button>
             </div>
-
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/c0c0c0/ffffff?text=Hotel+Image+3" alt="Baglioni Hotel Regina" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">9.0 Wonderful (463 reviews)</div>
-                    <h3 class="hotel-name">Baglioni Hotel Regina</h3>
-                    <p class="hotel-location">Rome</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$1,491 nightly</span>
-                        <span class="old-price">$1,894</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
-            </div>
-
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/b0b0b0/ffffff?text=Hotel+Image+4" alt="Trademark Collection by Wyndham" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">8.9 Very Good (43 reviews)</div>
-                    <h3 class="hotel-name">Trademark Collection by Wyndham</h3>
-                    <p class="hotel-location">Amaoudby</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$349 nightly</span>
-                        <span class="old-price">$419</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
-            </div>
+            <button id="doneTravelersButton" class="modal-select-button">Done</button>
         </div>
-    </section>
-    -->
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="./js/reservar.js"></script>
 </body>
 </html>
