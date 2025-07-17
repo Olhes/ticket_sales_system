@@ -46,6 +46,11 @@
             <form action="../backend/api/auth/register.php" method="POST">
                 <div>
                     <h1>REGISTRATE</h1>
+                    <?php if (isset($_GET['register_error'])): ?>
+                        <div class="error-message" style="color: red; margin-bottom: 10px; text-align:center;">
+                            <?php echo htmlspecialchars($_GET['register_error']); ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="input-box">
                         <input  type="text" placeholder="usuario" name="name" required> 
                         <i class="bx bxs-user"></i>
