@@ -3,7 +3,7 @@
 //clase para el horario/Viaje
 class Schedule {
     private $conn;
-    private $table_name = "schedules"; // Asegúrate que coincida con tu tabla SQL
+    private $table_name = "Horario"; // Asegúrate que coincida con tu tabla SQL
 
     public function __construct($db) {
         $this->conn = $db;
@@ -37,11 +37,34 @@ class Schedule {
      * @return array|false Datos del horario o false si no se encuentra.
      */
     public function getById($id) {
-        $query = "SELECT id, route_id, bus_id, departure_time, arrival_time, date, price, available_seats FROM " . $this->table_name . " WHERE id = :id LIMIT 0,1";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Obtiene un horario por su ID.
+     * @param string $origen
+     * @param string $destino
+     * @param string $fecha
+     * @return array|false Datos del horario o false si no se encuentra.
+     */
+
+    public function getASchedule($origen, $destino, $fecha) {
+        $query = "SELECT h.* FROM " . $this->table_name . " as h 
+        INNER JOIN Ruta ON Ruta.IdRuta = h.IdRuta 
+        INNER JOIN Bus ON Bus.IdBus = h.IdBus
+        INNER JOIN Terminal as E ON E.IdTerminal = Ruta.IdTerminalOrigen AND E.Direccion LIKE :origen
+        INNER JOIN Terminal as A ON A.IdTerminal = Ruta.IdTerminalDestino AND A.Direccion LIKE :destino
+        WHERE h.FechaSalida LIKE :fecha";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':origen', $origen);
+        $stmt->bindParam(':destino', $destino);
+        $stmt->bindParam(':fecha', $fecha);
+        $stmt->execute();
+        return $stmt->fetchALL(PDO::FETCH_ASSOC);
     }
 
     /**

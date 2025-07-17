@@ -1,13 +1,7 @@
-<?php
-    
-?>
-<form action="POST">
+<?php var_dump($_POST); echo("<br>"); var_dump($_SERVER); echo("<br>"); var_dump($_GET)?>
+<form action="./procesarfecha.php" method="GET">
     <input type="text" name="origen" id="origen">
     <input type="text" name="destino" id="destino">
     <input type="date" name="fecha" id="fecha-de-ida">
-    <section>
-        <input type="number" name="adultos" id="adultos">
-        <input type="number" name="niños" id="niños">
-    </section>
     <input type="submit" value="Buscar">
 </form>

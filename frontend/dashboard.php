@@ -119,6 +119,7 @@
                     credentials: 'include'
                 });
                 const result = await response.json();
+                console.log(result);
                 if (result && result.success) {
                     sessionStorage.removeItem('user');
                     window.location.href = 'form.php';

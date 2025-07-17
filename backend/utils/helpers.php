@@ -16,9 +16,8 @@ function sendResponse($data = [], $message = "Operación exitosa", $statusCode =
     echo json_encode([
         'success' => true,
         'message' => $message,
-        'data' => $data
     ]);
-    exit(); // Termina la ejecución del script
+    var_dump($data);
 }
 
 /**
