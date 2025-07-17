@@ -1,5 +1,3 @@
-// frontend/js/auth.js
-//Logica de autenticación(registro,login,logout)
 import { makeApiRequest } from './api.js';
 import { displayMessage, updateUIVisibility } from './ui.js';
 
@@ -26,14 +24,16 @@ export async function loginUser(email, password) {
 export async function logoutUser() {
     const result = await makeApiRequest('/auth/logout', 'POST');
     if (result && result.success) {
-        displayMessage(result.message, 'success');
+        sessionStorage.removeItem('user');
         sessionStorage.removeItem('currentUser');
-        updateUIVisibility(false); // Oculta todos los elementos de usuario logueado
+        displayMessage(result.message, 'success');
+        updateUIVisibility(false);
+        window.location.href = 'form.php';
         return true;
     } else {
         displayMessage("Error al cerrar sesión. Puede que ya estuvieras desconectado.", 'error');
-        sessionStorage.removeItem('currentUser'); // Forzar limpieza
         updateUIVisibility(false);
+        // No redirigir si hay error, solo mostrar mensaje
     }
     return false;
 }
