@@ -1,5 +1,4 @@
-// frontend/js/api.js
-//funciones para hacer llamadas al a api
+
 import { API_BASE_URL } from './config.js';
 import { displayMessage } from './ui.js';
 
@@ -9,7 +8,7 @@ export async function makeApiRequest(endpoint, method = 'GET', data = null) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        credentials: 'include' // Para enviar cookies de sesión
+        credentials: 'include' 
     };
 
     if (data) {

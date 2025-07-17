@@ -33,7 +33,7 @@ export async function logoutUser() {
     } else {
         displayMessage("Error al cerrar sesión. Puede que ya estuvieras desconectado.", 'error');
         updateUIVisibility(false);
-        // No redirigir si hay error, solo mostrar mensaje
+        
     }
     return false;
 }
