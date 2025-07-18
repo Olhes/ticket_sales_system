@@ -1,18 +1,12 @@
 <?php
-// classes/Schedule.php
-//clase para el horario/Viaje
 class Schedule {
     private $conn;
-    private $table_name = "Horario"; // Ahora coincide con la tabla real
+    private $table_name = "Horario";
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    /**
-     * Obtiene todos los horarios (sin filtro por ruta ni fecha).
-     * @return array Lista de horarios.
-     */
     public function getAll() {
         $query = "SELECT h.IdHorario, h.FechaSalida, h.HoraSalida, h.HoraLlegada, h.IdBus, h.IdRuta, h.IdConductor FROM " . $this->table_name . " h ORDER BY h.FechaSalida DESC, h.HoraSalida DESC";
         $stmt = $this->conn->prepare($query);
@@ -20,12 +14,6 @@ class Schedule {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Obtiene los horarios para una ruta y fecha específicas.
-     * @param int $route_id
-     * @param string $date (Formato 'YYYY-MM-DD')
-     * @return array Lista de horarios.
-     */
     public function findByRouteAndDate($route_id, $date) {
         $query = "SELECT h.IdHorario, h.FechaSalida, h.HoraSalida, h.HoraLlegada, h.IdBus, h.IdRuta, h.IdConductor FROM " . $this->table_name . " h WHERE h.IdRuta = :route_id AND h.FechaSalida = :date ORDER BY h.HoraSalida";
         $stmt = $this->conn->prepare($query);
@@ -35,11 +23,6 @@ class Schedule {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Obtiene un horario por su ID.
-     * @param int $id
-     * @return array|false Datos del horario o false si no se encuentra.
-     */
     public function getById($id) {
         $query = "SELECT IdHorario, FechaSalida, HoraSalida, HoraLlegada, IdBus, IdRuta, IdConductor FROM " . $this->table_name . " WHERE IdHorario = :id LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
@@ -48,11 +31,6 @@ class Schedule {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Decrementa el número de asientos disponibles para un horario.
-     * @param int $schedule_id
-     * @return bool True si la actualización fue exitosa.
-     */
     public function decrementAvailableSeats($schedule_id) {
         $query = "UPDATE " . $this->table_name . " SET available_seats = available_seats - 1 WHERE id = :id AND available_seats > 0";
         $stmt = $this->conn->prepare($query);
@@ -65,11 +43,6 @@ class Schedule {
         }
     }
 
-    /**
-     * Incrementa el número de asientos disponibles para un horario (ej. al cancelar un ticket).
-     * @param int $schedule_id
-     * @return bool True si la actualización fue exitosa.
-     */
     public function incrementAvailableSeats($schedule_id) {
         $query = "UPDATE " . $this->table_name . " SET available_seats = available_seats + 1 WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -82,11 +55,6 @@ class Schedule {
         }
     }
 
-    /**
-     * Crea un nuevo horario.
-     * @param array $data
-     * @return bool
-     */
     public function create($data) {
         $query = "INSERT INTO Horario (FechaSalida, HoraSalida, HoraLlegada, IdBus, IdRuta, IdConductor) VALUES (:FechaSalida, :HoraSalida, :HoraLlegada, :IdBus, :IdRuta, :IdConductor)";
         $stmt = $this->conn->prepare($query);
@@ -104,11 +72,6 @@ class Schedule {
         }
     }
 
-    /**
-     * Actualiza un horario existente.
-     * @param array $data
-     * @return bool
-     */
     public function update($data) {
         $query = "UPDATE Horario SET FechaSalida = :FechaSalida, HoraSalida = :HoraSalida, HoraLlegada = :HoraLlegada, IdBus = :IdBus, IdRuta = :IdRuta, IdConductor = :IdConductor WHERE IdHorario = :IdHorario";
         $stmt = $this->conn->prepare($query);
@@ -127,11 +90,6 @@ class Schedule {
         }
     }
 
-    /**
-     * Elimina un horario por su ID.
-     * @param int $id
-     * @return bool
-     */
     public function delete($id) {
         $query = "DELETE FROM Horario WHERE IdHorario = :IdHorario";
         $stmt = $this->conn->prepare($query);
