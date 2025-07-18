@@ -27,6 +27,8 @@
                     <span class="material-icons-sharp">close</span>
                 </div>
             </div>
+            <div id="user-info" class="session-info"></div>
+
             <div class="sidebar">
                 <a href="dashboard.php">
                     <span class="material-icons-sharp">grid_view</span>
@@ -44,6 +46,7 @@
                     <span class="material-icons-sharp">settings</span>
                     <h3>Settings</h3>
                 </a>
+
                 <a href="form.php" id="logoutBtn">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
@@ -112,6 +115,23 @@
     </div>
     <script src="./js/dashboard.js"></script>
     <script type="module">
+        function getUserFromSession() {
+            let user = sessionStorage.getItem('user');
+            if (!user) return null;
+            try { user = JSON.parse(user); } catch { return null; }
+            return {
+                nombre: user.name || '',
+                correo: user.email || '',
+                rol: user.role || ''
+            };
+        }
+         const user = getUserFromSession();
+        const userInfoDiv = document.getElementById('user-info');
+         if (user && user.nombre && user.correo) {
+            userInfoDiv.innerHTML = `<strong>${user.nombre}</strong><br><small>${user.correo}</small><div style='margin-top:8px; font-size:12px; color:#888;'>${user.rol === 'admin' ? 'Administrador' : 'Usuario'}</div>`;
+        } else {
+            userInfoDiv.innerHTML = `<em>No logueado</em>`;
+        }
         async function logout() {
             try {
                 const response = await fetch('../backend/api/auth/logout.php', {

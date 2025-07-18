@@ -28,7 +28,7 @@ if (loginForm) {
             if (result.success) {
                 sessionStorage.setItem('user', JSON.stringify(result.data.user));
                 if (result.data.user.role === 'admin') {
-                    window.location.href = 'dashboard.php';
+                    window.location.href = 'dashboard-admin.php';
                 } else {
                     window.location.href = 'dashboard.php';
                 }
@@ -95,7 +95,7 @@ if (registerForm) {
 if (sessionStorage.getItem('user')) {
     const user = JSON.parse(sessionStorage.getItem('user'));
     if (user.role === 'admin') {
-        window.location.href = 'dashboard.php';
+        window.location.href = 'dashboard-admin.php';
     } else {
         window.location.href = 'dashboard.php';
     }

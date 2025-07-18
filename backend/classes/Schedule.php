@@ -3,10 +3,21 @@
 //clase para el horario/Viaje
 class Schedule {
     private $conn;
-    private $table_name = "Horario"; // Asegúrate que coincida con tu tabla SQL
+    private $table_name = "Horario"; // Ahora coincide con la tabla real
 
     public function __construct($db) {
         $this->conn = $db;
+    }
+
+    /**
+     * Obtiene todos los horarios (sin filtro por ruta ni fecha).
+     * @return array Lista de horarios.
+     */
+    public function getAll() {
+        $query = "SELECT h.IdHorario, h.FechaSalida, h.HoraSalida, h.HoraLlegada, h.IdBus, h.IdRuta, h.IdConductor FROM " . $this->table_name . " h ORDER BY h.FechaSalida DESC, h.HoraSalida DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -16,14 +27,7 @@ class Schedule {
      * @return array Lista de horarios.
      */
     public function findByRouteAndDate($route_id, $date) {
-        $query = "SELECT
-                    s.id, s.route_id, s.bus_id, s.departure_time, s.arrival_time, s.date, s.price, s.available_seats,
-                    r.origin, r.destination, b.plate_number, b.capacity, b.model
-                  FROM " . $this->table_name . " s
-                  JOIN routes r ON s.route_id = r.id
-                  JOIN buses b ON s.bus_id = b.id
-                  WHERE s.route_id = :route_id AND s.date = :date AND s.available_seats > 0
-                  ORDER BY s.departure_time";
+        $query = "SELECT h.IdHorario, h.FechaSalida, h.HoraSalida, h.HoraLlegada, h.IdBus, h.IdRuta, h.IdConductor FROM " . $this->table_name . " h WHERE h.IdRuta = :route_id AND h.FechaSalida = :date ORDER BY h.HoraSalida";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':route_id', $route_id, PDO::PARAM_INT);
         $stmt->bindParam(':date', $date);
@@ -37,7 +41,7 @@ class Schedule {
      * @return array|false Datos del horario o false si no se encuentra.
      */
     public function getById($id) {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+        $query = "SELECT IdHorario, FechaSalida, HoraSalida, HoraLlegada, IdBus, IdRuta, IdConductor FROM " . $this->table_name . " WHERE IdHorario = :id LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -97,6 +101,68 @@ class Schedule {
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error al incrementar asientos: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Crea un nuevo horario.
+     * @param array $data
+     * @return bool
+     */
+    public function create($data) {
+        $query = "INSERT INTO Horario (FechaSalida, HoraSalida, HoraLlegada, IdBus, IdRuta, IdConductor) VALUES (:FechaSalida, :HoraSalida, :HoraLlegada, :IdBus, :IdRuta, :IdConductor)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':FechaSalida', $data['FechaSalida']);
+        $stmt->bindParam(':HoraSalida', $data['HoraSalida']);
+        $stmt->bindParam(':HoraLlegada', $data['HoraLlegada']);
+        $stmt->bindParam(':IdBus', $data['IdBus'], PDO::PARAM_INT);
+        $stmt->bindParam(':IdRuta', $data['IdRuta'], PDO::PARAM_INT);
+        $stmt->bindParam(':IdConductor', $data['IdConductor'], PDO::PARAM_INT);
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Error al crear horario: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Actualiza un horario existente.
+     * @param array $data
+     * @return bool
+     */
+    public function update($data) {
+        $query = "UPDATE Horario SET FechaSalida = :FechaSalida, HoraSalida = :HoraSalida, HoraLlegada = :HoraLlegada, IdBus = :IdBus, IdRuta = :IdRuta, IdConductor = :IdConductor WHERE IdHorario = :IdHorario";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':FechaSalida', $data['FechaSalida']);
+        $stmt->bindParam(':HoraSalida', $data['HoraSalida']);
+        $stmt->bindParam(':HoraLlegada', $data['HoraLlegada']);
+        $stmt->bindParam(':IdBus', $data['IdBus'], PDO::PARAM_INT);
+        $stmt->bindParam(':IdRuta', $data['IdRuta'], PDO::PARAM_INT);
+        $stmt->bindParam(':IdConductor', $data['IdConductor'], PDO::PARAM_INT);
+        $stmt->bindParam(':IdHorario', $data['IdHorario'], PDO::PARAM_INT);
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Error al actualizar horario: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Elimina un horario por su ID.
+     * @param int $id
+     * @return bool
+     */
+    public function delete($id) {
+        $query = "DELETE FROM Horario WHERE IdHorario = :IdHorario";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':IdHorario', $id, PDO::PARAM_INT);
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Error al eliminar horario: ' . $e->getMessage());
             return false;
         }
     }

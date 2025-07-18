@@ -1,0 +1,219 @@
+/* General layout for navbar (can be shared with reservar.css) */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.Logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.navbar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar nav ul li {
+    margin-left: 20px;
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+    color: #007bff;
+}
+
+.get-started1 {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.get-started1:hover {
+    background-color: #0056b3;
+}
+
+/* Seat Selection Specific Styles */
+.seat-selection-container {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.seat-selection-container h1 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.seat-selection-container p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.bus-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.driver-seat {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.seats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 50px); /* 4 seats per row, adjust as needed */
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.seat.available {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+}
+
+.seat.available:hover {
+    background-color: #d0d0d0;
+    border-color: #999;
+}
+
+.seat.occupied {
+    background-color: #ff7782; /* Danger color */
+    border-color: #ff5566;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.seat.selected {
+    background-color: #41f1b6; /* Success color */
+    border-color: #30cc90;
+    color: white;
+}
+
+.legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.legend span {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    border: 2px solid; /* For border representation */
+}
+
+.legend .available { background-color: #e0e0e0; border-color: #ccc; }
+.legend .occupied { background-color: #ff7782; border-color: #ff5566; }
+.legend .selected { background-color: #41f1b6; border-color: #30cc90; }
+
+
+.selection-summary {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.selection-summary h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.selection-summary p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.buy-button {
+    padding: 1rem 2.5rem;
+    background-color: #28a745; /* Green buy button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.buy-button:hover {
+    background-color: #218838;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .bus-layout {
+        padding: 10px;
+    }
+    .seats-grid {
+        grid-template-columns: repeat(3, 40px); /* Adjust for smaller screens */
+        gap: 10px;
+    }
+    .seat {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    .seat-selection-container {
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+}

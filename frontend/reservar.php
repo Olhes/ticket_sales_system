@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expedia-like Layout</title>
+    <title>Buscar y Reservar Pasajes</title>
     <link rel="stylesheet" href="./css/reservar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 
-  <header class="navbar">
+    <header class="navbar">
         <div class="Logo">PakaBussines</div>
         <nav>
             <ul>
@@ -19,132 +20,83 @@
                 <li><a href="index.php">Info</a></li>
             </ul>
         </nav>
-
         <a href="form.php" class="get-started1">Get Started</a>
     </header>
 
     <section class="hero-section">
         <div class="hero-content">
-            <h1>¡BusesCorp!</h1>
+            <h1>¡Encuentra tu Pasaje Ideal!</h1>
             <div class="search-form-container">
-                <!--<div class="search-tabs">
-                    <button class="tab-button active">
-                        <i class="fas fa-bed"></i> Stays
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-plane"></i> Flights
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-car"></i> Cars
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-box"></i> Packages
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-utensils"></i> Things to do
-                    </button>
-                    <button class="tab-button">
-                        <i class="fas fa-ship"></i> Cruises
-                    </button>
-                </div> -->
-                <form class="search-form">
+                <form class="search-form" action="seat.php" method="GET">
                     <div class="form-row">
                         <div class="input-group">
-                            <label for="from">"From</label>
-                            <input type="text" id="from" placeholder="From">
+                            <label for="from">Origen:</label>
+                            <select id="from" name="from" required>
+                                <option value="">Selecciona Origen</option>
+                                <option value="Tacna">Tacna</option>
+                                <option value="Arequipa">Arequipa</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Cusco">Cusco</option>
+                                <option value="Puno">Puno</option>
+                            </select>
                         </div>
+
                         <div class="input-group">
-                            <label for="destination">Where to?</label>
-                            <input type="text" id="destination" placeholder="Going to">
+                            <label for="destination">Destino:</label>
+                            <select id="destination" name="destination" required>
+                                <option value="">Selecciona Destino</option>
+                                <option value="Tacna">Tacna</option>
+                                <option value="Arequipa">Arequipa</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Cusco">Cusco</option>
+                                <option value="Puno">Puno</option>
+                            </select>
                         </div>
+
                         <div class="input-group">
-                            <label for="dates">Dates</label>
-                            <input type="text" id="dates" value="Jul 17 - Jul 22" readonly>
+                            <label for="empresa">Empresa:</label>
+                            <select id="empresa" name="empresa">
+                                <option value="">Cualquier Empresa</option>
+                                <option value="Cruz del Sur">Cruz del Sur</option>
+                                <option value="Oltursa">Oltursa</option>
+                                <option value="Civa">Civa</option>
+                            </select>
                         </div>
+
                         <div class="input-group">
-                            <label for="travelers">Travelers</label>
-                            <input type="text" id="travelers" value="2 travelers, 1 room" readonly>
+                            <label for="tipo_bus">Tipo de Bus:</label>
+                            <select id="tipo_bus" name="tipo_bus">
+                                <option value="">Cualquier Tipo</option>
+                                <option value="Común">Común</option>
+                                <option value="Cómodo">Cómodo</option>
+                                <option value="Lujo">Lujo</option>
+                            </select>
                         </div>
-                        <button type="submit" class="search-button">Search</button>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="bundle-save">
-                        <label for="bundle-save">Add a flight to bundle & Save</label>
+
+                        <div class="input-group">
+                            <label for="fecha_salida">Fecha Salida:</label>
+                            <input type="date" id="fecha_salida" name="fecha_salida" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="hora_salida">Hora Salida:</label>
+                            <input type="time" id="hora_salida" name="hora_salida">
+                        </div>
+
+                        <button type="submit" class="search-button">Buscar Horarios</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    <!--
-    <section class="hotel-listings-section">
-        <div class="listings-header">
-            <h2>Save up to 40%: Book by July 21</h2>
-            <p>Showing deals for Aug 1 - Aug 3</p>
-            <button class="see-more-button">See more deals</button>
-        </div>
-        <div class="hotel-cards-container">
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/e0e0e0/ffffff?text=Hotel+Image+1" alt="Alrazi Hotel" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">8.0 Very Good (98 reviews)</div>
-                    <h3 class="hotel-name">Alrazi Hotel</h3>
-                    <p class="hotel-location">Istanbul</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$198 nightly</span>
-                        <span class="old-price">$260</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
-            </div>
 
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/d0d0d0/ffffff?text=Hotel+Image+2" alt="Divan Istanbul" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">9.2 Wonderful (114 reviews)</div>
-                    <h3 class="hotel-name">Divan Istanbul</h3>
-                    <p class="hotel-location">Istanbul</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$385 nightly</span>
-                        <span class="old-price">$614</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
-            </div>
-
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/c0c0c0/ffffff?text=Hotel+Image+3" alt="Baglioni Hotel Regina" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">9.0 Wonderful (463 reviews)</div>
-                    <h3 class="hotel-name">Baglioni Hotel Regina</h3>
-                    <p class="hotel-location">Rome</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$1,491 nightly</span>
-                        <span class="old-price">$1,894</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
-            </div>
-
-            <div class="hotel-card">
-                <img src="https://via.placeholder.com/300x200/b0b0b0/ffffff?text=Hotel+Image+4" alt="Trademark Collection by Wyndham" class="hotel-image">
-                <div class="hotel-info">
-                    <div class="hotel-rating">8.9 Very Good (43 reviews)</div>
-                    <h3 class="hotel-name">Trademark Collection by Wyndham</h3>
-                    <p class="hotel-location">Amaoudby</p>
-                    <div class="hotel-price">
-                        <span class="current-price">$349 nightly</span>
-                        <span class="old-price">$419</span>
-                    </div>
-                    <p class="taxes-info">total with taxes and fees</p>
-                    <button class="member-price-button"><i class="fas fa-lock"></i> Member Price available</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
-
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Inicializar Flatpickr para el campo de fecha
+        flatpickr("#fecha_salida", {
+            dateFormat: "Y-m-d",
+            minDate: "today" // No permite seleccionar fechas pasadas
+        });
+    </script>
 </body>
 </html>
