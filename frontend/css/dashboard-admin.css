@@ -1,3 +1,21 @@
+/* Estilos específicos para dashboard-admin */
+.crud-table { width: 100%; border-collapse: collapse; margin-top: 24px; background: #fff; box-shadow: 0 2px 8px #0001; }
+.crud-table th, .crud-table td { border: 1px solid #e0e0e0; padding: 10px 8px; text-align: center; }
+.crud-table th { background: #1976d2; color: #fff; font-weight: 600; }
+.crud-table tr:nth-child(even) { background: #f5f7fa; }
+.crud-actions button { margin: 0 2px; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer; transition: background .2s; }
+.crud-actions .edit-btn { background: #ffeb3b; color: #333; }
+.crud-actions .edit-btn:hover { background: #ffe066; }
+.crud-actions .delete-btn { background: #e53935; color: #fff; }
+.crud-actions .delete-btn:hover { background: #b71c1c; }
+.crud-form { margin: 24px 0; padding: 16px; background: #f8f8f8; border-radius: 8px; box-shadow: 0 1px 4px #0001; }
+.crud-form label { margin-right: 12px; }
+.crud-form input, .crud-form select { margin: 4px 8px 4px 0; padding: 4px 8px; border: 1px solid #bdbdbd; border-radius: 4px; }
+.crud-form button[type="submit"] { background: #1976d2; color: #fff; border: none; border-radius: 4px; padding: 6px 16px; margin-left: 8px; }
+.crud-form button[type="submit"]:hover { background: #1565c0; }
+.crud-form #cancelEdit { background: #bdbdbd; color: #333; border: none; border-radius: 4px; padding: 6px 16px; margin-left: 8px; }
+.session-info { background: #f5f5f5; border-radius: 8px; padding: 12px; margin: 16px 0; text-align: center; }
+
 /* Variables (optional but good practice for consistency) */
 :root {
     --color-primary:#7380ec;
@@ -36,7 +54,6 @@ body.dark-theme {
 
 /* Universal styles */
 * {
-    margin:0;
     padding:0;
     outline:0;
     appearance:none;
@@ -188,7 +205,6 @@ aside .sidebar {
     flex-direction:column;
     height:86vh;
     position:relative;
-    top:3rem;
     border-radius: var(--card-border-radius); 
     box-shadow: var(--box-shadow); 
 }
@@ -200,8 +216,9 @@ aside h3 {
 
 aside .sidebar a {
     display:flex;
+    padding-top: 1rem;
     color:var(--color-info-dark); 
-    margin-left:2rem; 
+    margin-left:0rem; 
     gap:1rem;
     align-items:center;
     position:relative;
@@ -210,6 +227,7 @@ aside .sidebar a {
 }
 
 aside .sidebar a span {
+    margin-left:calc(1rem + 6px);
     font-size: 1.6rem;
     transition: all 300ms ease;
 }
@@ -221,19 +239,10 @@ aside .sidebar a:last-child {
 }
 
 aside .sidebar a.active {
-    background: var(--color-light);
     color: var(--color-primary);
     margin-left:0;
 }
 
-aside .sidebar a.active::before { 
-    content: "";
-    width: 6px;
-    height: 100%;
-    background:var(--color-primary);
-    position: absolute; 
-    left: 0; 
-}
 
 aside .sidebar a.active span {
     color: var(--color-primary); 
