@@ -1,5 +1,3 @@
-// JS para dashboard-admin (CRUD Horario)
-// Mostrar datos de sesión
 export function getUserFromSession() {
     let user = sessionStorage.getItem('user');
     if (!user) return null;
@@ -39,7 +37,6 @@ export async function loadOptionsCache() {
 export async function fetchHorarios() {
     const res = await fetch(API_URL);
     const data = await res.json();
-    // Si el backend devuelve {success: true, data: [...]}, adaptarse
     if (Array.isArray(data)) return data;
     if (data && Array.isArray(data.data)) return data.data;
     return [];
@@ -49,7 +46,6 @@ export function renderTable(horarios) {
     const tbody = document.getElementById('horario-tbody');
     tbody.innerHTML = '';
     if (!optionsCache) {
-        // Si no hay cache, mostrar IDs
         horarios.forEach(h => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -97,7 +93,6 @@ export function renderTable(horarios) {
 }
 
 export async function fetchOptions() {
-    // Llama a los endpoints individuales para buses, rutas y conductores
     const [busesRes, rutasRes, conductoresRes] = await Promise.all([
         fetch('../backend/api/bus/get.php'),
         fetch('../backend/api/ruta/get.php'),
@@ -106,7 +101,6 @@ export async function fetchOptions() {
     let buses = await busesRes.json();
     let rutas = await rutasRes.json();
     let conductores = await conductoresRes.json();
-    // Asegura que siempre sean arrays
     buses = Array.isArray(buses) ? buses : (buses && Array.isArray(buses.data) ? buses.data : []);
     rutas = Array.isArray(rutas) ? rutas : (rutas && Array.isArray(rutas.data) ? rutas.data : []);
     conductores = Array.isArray(conductores) ? conductores : (conductores && Array.isArray(conductores.data) ? conductores.data : []);
@@ -199,12 +193,10 @@ export async function loadHorarios() {
     renderTable(horarios);
 }
 
-// Inicialización
 renderUserInfo();
 renderForm();
 loadOptionsCache().then(loadHorarios());
 
-// Logout
 const logoutBtn = document.getElementById('logoutBtn');
 if (logoutBtn) {
     logoutBtn.addEventListener('click', async (e) => {

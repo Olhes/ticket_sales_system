@@ -1,6 +1,4 @@
 <?php
-// api/tickets/user_tickets.php
-//endpoint para obtener tickets de un usuario
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Ticket.php';

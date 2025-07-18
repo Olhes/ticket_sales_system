@@ -1,6 +1,4 @@
 <?php
-// api/tickets/book.php
-//endpoint para reservar un ticket
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Ticket.php';
@@ -30,7 +28,6 @@ $user_id = $user_data['id'];
 $ticket = new Ticket($db);
 $schedule = new Schedule($db);
 
-// --- Lógica de Reserva (requiere transacciones para ser robusta) ---
 try {
     $db->beginTransaction(); // Inicia una transacción
 

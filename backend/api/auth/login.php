@@ -1,6 +1,4 @@
 <?php
-// api/auth/login.php
-//Endpint para inicio de sesion
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Auth.php';

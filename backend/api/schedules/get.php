@@ -1,6 +1,4 @@
 <?php
-// api/schedules/get.php
-//endpoint para obtener horario de viajes
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Schedule.php';
@@ -24,7 +22,6 @@ if (!$auth->isAuthenticated()) {
 
 $schedule = new Schedule($db);
 
-// Si se pasan parámetros de filtro, usarlos, si no, devolver todos los horarios
 if (isset($_GET['route_id']) && isset($_GET['date'])) {
     $route_id = $_GET['route_id'];
     $date = $_GET['date'];

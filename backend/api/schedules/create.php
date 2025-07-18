@@ -1,5 +1,4 @@
 <?php
-// api/schedules/create.php
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Schedule.php';

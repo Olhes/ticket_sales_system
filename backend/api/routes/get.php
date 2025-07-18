@@ -1,6 +1,4 @@
 <?php
-// api/routes/get.php
-//endpoint para inicio de sesión
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Route.php';

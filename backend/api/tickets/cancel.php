@@ -1,6 +1,4 @@
 <?php
-// api/tickets/cancel.php
-//Endpoint para cancelar un ticket
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Ticket.php';
@@ -8,7 +6,7 @@ require_once __DIR__ . '/../../classes/Schedule.php';
 require_once __DIR__ . '/../../utils/helpers.php';
 require_once __DIR__ . '/../../classes/Auth.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') { // Usamos POST para acciones que cambian el estado
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendError("Método no permitido.", 405);
 }
 
